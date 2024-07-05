@@ -17,7 +17,9 @@ CREATE TABLE IF NOT EXISTS habit_entries(
 	entry_id SERIAL PRIMARY KEY,
 	user_id INTEGER REFERENCES users(user_id),
 	habit_id INTEGER REFERENCES habits(habit_id),
-	entry_date TIMESTAMP,
+	entry_date DATE,
 	duration INTEGER
 )
+
+
 
