@@ -6,9 +6,17 @@ CREATE TABLE IF NOT EXISTS users(
 
 CREATE TABLE IF NOT EXISTS habits(
 	habit_id SERIAL PRIMARY KEY,
-	user_id INTEGER NOT NULL,
-	habit_name VARCHAR(100) NOT NULL,
-	CONSTRAINT fk_author
-		FOREIGN KEY (user_id)
-		REFERENCES users(user_id)
+	user_id INTEGER REFERENCES users(user_id),
+	habit_name VARCHAR(100) NOT NULL
 )
+
+
+
+CREATE TABLE IF NOT EXISTS habit_entries(
+	entry_id SERIAL PRIMARY KEY,
+	user_id INTEGER REFERENCES users(user_id),
+	habit_id INTEGER REFERENCES habits(habit_id),
+	entry_date TIMESTAMP,
+	duration INTEGER
+)
+
