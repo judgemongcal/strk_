@@ -1,4 +1,4 @@
-const appModel = require("../models/appModel");
+const appModel = require("../models/UserModel");
 
 // @TODO: Provide functions
 exports.getUsers = async (req, res) => {
