@@ -28,4 +28,30 @@ exports.addUser = async (userData) => {
 	}
 };
 
+exports.updateUser = async (id, userData) => {
+	try {
+		const res = await client.query(
+			`UPDATE users
+			 SET    username = $1, first_name = $2, last_name = $3
+			 WHERE  user_id = $4`,
+			[
+				userData.username,
+				userData.first_name,
+				userData.last_name,
+				id,
+			],
+		);
+
+		if (res.rowCount === 0) {
+			throw new Error("User not found");
+		}
+
+		return res.rows[0];
+	} catch (error) {
+		throw new Error(
+			`Error updating user: ${error.message}`,
+		);
+	}
+};
+
 // @TODO: Add more calls

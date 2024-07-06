@@ -4,6 +4,7 @@ const appController = require("../controllers/AppController");
 
 // @TODO: PROVIDE ROUTES
 router.get("/", appController.getUsers);
-router.post("/", appController.addUser);
+router.post("/add-user", appController.addUser);
+router.put("/:id", appController.editUser);
 
 module.exports = router;
