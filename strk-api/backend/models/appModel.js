@@ -54,4 +54,25 @@ exports.updateUser = async (id, userData) => {
 	}
 };
 
+exports.deleteUser = async (id) => {
+	try {
+		const res = await client.query(
+			`DELETE FROM users
+			 WHERE user_id = $1
+			`,
+			[id],
+		);
+
+		if (res.rowCount === 0) {
+			throw new Error("User not found");
+		}
+
+		return res.rows[0];
+	} catch (error) {
+		throw new Error(
+			`Error deleting user: ${error.message}`,
+		);
+	}
+};
+
 // @TODO: Add more calls
