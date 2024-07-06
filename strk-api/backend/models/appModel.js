@@ -11,4 +11,21 @@ exports.getUsers = async () => {
 	}
 };
 
+exports.addUser = async (userData) => {
+	try {
+		const res = await client.query(
+			`INSERT INTO users (username, first_name, last_name)
+			VALUES ($1, $2, $3) 
+			RETURNING *`,
+			[
+				userData.username,
+				userData.first_name,
+				userData.last_name,
+			],
+		);
+	} catch (error) {
+		throw new Error(`Error adding user: ${error.message}`);
+	}
+};
+
 // @TODO: Add more calls
