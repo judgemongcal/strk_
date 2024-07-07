@@ -11,6 +11,23 @@ exports.getUsers = async () => {
 	}
 };
 
+exports.getUser = async (id) => {
+	try {
+		const res = await client.query(
+			`
+			SELECT *
+			FROM users
+			WHERE user_id = $1`,
+			[id],
+		);
+		return res.rows;
+	} catch (error) {
+		throw new Error(
+			`Error fetching user: ${error.message}`,
+		);
+	}
+};
+
 exports.addUser = async (userData) => {
 	try {
 		const res = await client.query(

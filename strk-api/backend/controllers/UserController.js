@@ -10,6 +10,15 @@ exports.getUsers = async (req, res) => {
 	}
 };
 
+exports.getUser = async (req, res) => {
+	try {
+		const user = await appModel.getUser(req.params.id);
+		res.status(200).json(user);
+	} catch (error) {
+		res.status(500).json({ error: error.message });
+	}
+};
+
 exports.addUser = async (req, res) => {
 	try {
 		const user = await appModel.addUser(req.body);
