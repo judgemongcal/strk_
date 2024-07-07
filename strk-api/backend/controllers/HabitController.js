@@ -11,6 +11,19 @@ exports.getHabits = async (req, res) => {
 	}
 };
 
+exports.getHabit = async (req, res) => {
+	try {
+		const { userId, habitId } = req.params;
+		const habit = await habitModel.getHabit(
+			userId,
+			habitId,
+		);
+		res.status(200).json(habit);
+	} catch (error) {
+		res.status(500).json({ message: error.message });
+	}
+};
+
 exports.addHabit = async (req, res) => {};
 
 exports.updateHabit = async (req, res) => {};
