@@ -31,7 +31,10 @@ exports.addHabit = async (req, res) => {
 			user_id,
 			habit_name,
 		);
-		res.status(200).json(habit);
+		res.status(200).json({
+			message: "Habit has been added successfully.",
+			payload: habit,
+		});
 	} catch (error) {
 		res.status(500).json({ message: error.message });
 	}
