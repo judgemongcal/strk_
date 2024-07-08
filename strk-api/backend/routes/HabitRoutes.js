@@ -8,7 +8,10 @@ router.get(
 	habitController.getHabit,
 );
 router.post("/:id", habitController.addHabit);
-router.put("/:id", habitController.updateHabit);
+router.put(
+	"/:user_id/habit/:habit_id",
+	habitController.updateHabit,
+);
 router.delete("/:id", habitController.deleteHabit);
 
 module.exports = router;
