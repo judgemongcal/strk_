@@ -6,10 +6,6 @@ const habitController = require("../controllers/HabitController");
 // @TODO: PROVIDE ROUTES
 router.get("/", userController.getUsers);
 router.get("/:id", userController.getUser);
-router.get(
-	"/:userId/habit/:habitId",
-	habitController.getHabit,
-);
 router.post("/", userController.addUser);
 router.put("/:id", userController.editUser);
 router.delete("/:id", userController.deleteUser);
