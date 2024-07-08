@@ -24,7 +24,18 @@ exports.getHabit = async (req, res) => {
 	}
 };
 
-exports.addHabit = async (req, res) => {};
+exports.addHabit = async (req, res) => {
+	try {
+		const { user_id, habit_name } = req.body;
+		const habit = await habitModel.addHabit(
+			user_id,
+			habit_name,
+		);
+		res.status(200).json(habit);
+	} catch (error) {
+		res.status(500).json({ message: error.message });
+	}
+};
 
 exports.updateHabit = async (req, res) => {};
 

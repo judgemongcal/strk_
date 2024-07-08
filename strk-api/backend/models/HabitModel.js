@@ -37,7 +37,20 @@ exports.getHabit = async (userId, habitId) => {
 	}
 };
 
-exports.addHabit = async (id, habitData) => {};
+exports.addHabit = async (id, habit) => {
+	try {
+		const res = await client.query(
+			`
+		INSERT INTO habits (user_id, habit_name)
+		VALUES ($1, $2)
+		RETURNING *
+		`,
+			[id, habit],
+		);
+	} catch (error) {
+		throw new Error(`Error adding habit: ${error.message}`);
+	}
+};
 
 exports.updateHabit = async (id, habitData) => {};
 
