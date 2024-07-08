@@ -56,4 +56,18 @@ exports.updateHabit = async (req, res) => {
 	}
 };
 
-exports.deleteHabit = async (req, res) => {};
+exports.deleteHabit = async (req, res) => {
+	try {
+		const habit = await habitModel.deleteHabit(
+			req.params.user_id,
+			req.params.habit_id,
+		);
+		res
+			.status(200)
+			.json({
+				message: "Habit has been deleted successfully.",
+			});
+	} catch (error) {
+		res.status(500).json({ message: error.message });
+	}
+};

@@ -75,4 +75,24 @@ exports.updateHabit = async (user_id, habit_id, habit) => {
 	}
 };
 
-exports.deleteHabit = async (id) => {};
+exports.deleteHabit = async (user_id, habit_id) => {
+	try {
+		const res = await client.query(
+			`
+			DELETE FROM habits
+			WHERE  user_id = $1
+			AND    habit_id = $2
+			`,
+			[user_id, habit_id],
+		);
+		if (res.rowCount === 0) {
+			throw new Error("Habit not found");
+		}
+
+		return res.rows;
+	} catch (error) {
+		throw new Error(
+			`Error deleting habit: ${error.message}`,
+		);
+	}
+};

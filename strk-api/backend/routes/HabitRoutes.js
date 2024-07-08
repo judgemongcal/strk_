@@ -12,6 +12,9 @@ router.put(
 	"/:user_id/habit/:habit_id",
 	habitController.updateHabit,
 );
-router.delete("/:id", habitController.deleteHabit);
+router.delete(
+	"/:user_id/habit/:habit_id",
+	habitController.deleteHabit,
+);
 
 module.exports = router;
