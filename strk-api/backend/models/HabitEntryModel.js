@@ -38,8 +38,9 @@ exports.getEntry = async (entryId) => {
 };
 
 exports.addEntry = async (body) => {
-	const { user_id, habit_id, entry_date, duration } = body;
 	try {
+		const { user_id, habit_id, entry_date, duration } =
+			body;
 		const res = await client.query(
 			`
 		INSERT INTO habit_entries (user_id, habit_id, entry_date, duration)
@@ -52,5 +53,25 @@ exports.addEntry = async (body) => {
 		return res.rows;
 	} catch (error) {
 		throw new Error(`Error adding entry: ${error.message}`);
+	}
+};
+
+exports.updateEntry = async (body) => {
+	try {
+		const { entry_id, duration } = body;
+		const res = await client.query(
+			`
+			UPDATE habit_entries
+			SET    duration = $1
+			WHERE  entry_id = $2
+			RETURNING *
+			`,
+			[duration, entry_id],
+		);
+		return res.rows;
+	} catch (error) {
+		throw new Error(
+			`Error updating entry: ${error.message}`,
+		);
 	}
 };

@@ -34,3 +34,17 @@ exports.addEntry = async (req, res) => {
 		res.status(500).json({ error: error.message });
 	}
 };
+
+exports.updateEntry = async (req, res) => {
+	try {
+		const entry = await habitEntryModel.updateEntry(
+			req.body,
+		);
+		res.status(200).json({
+			message: "Entry has been updated successfully.",
+			payload: entry,
+		});
+	} catch (error) {
+		res.status(500).json({ error: error.message });
+	}
+};
