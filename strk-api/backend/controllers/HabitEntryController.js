@@ -11,3 +11,14 @@ exports.getEntries = async (req, res) => {
 		res.status(500).json({ error: error.message });
 	}
 };
+
+exports.getEntry = async (req, res) => {
+	try {
+		const entry = await habitEntryModel.getEntry(
+			req.params.entryId,
+		);
+		res.status(200).json(entry);
+	} catch (error) {
+		res.status(500).json({ error: error.message });
+	}
+};

@@ -19,3 +19,20 @@ exports.getEntries = async (userId, habitId) => {
 		);
 	}
 };
+
+exports.getEntry = async (entryId) => {
+	try {
+		const res = await client.query(
+			`SELECT *
+			 FROM habit_entries
+			 WHERE entry_id = $1`,
+			[entryId],
+		);
+
+		return res.rows;
+	} catch (error) {
+		throw new Error(
+			`Error fetching habit entry: ${error.message}`,
+		);
+	}
+};

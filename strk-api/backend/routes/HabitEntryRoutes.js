@@ -6,5 +6,6 @@ router.get(
 	"/:userId/habit/:habitId",
 	habitEntryController.getEntries,
 );
+router.get("/:entryId", habitEntryController.getEntry);
 
 module.exports = router;
