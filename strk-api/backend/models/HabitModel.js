@@ -47,6 +47,7 @@ exports.addHabit = async (id, habit) => {
 		`,
 			[id, habit],
 		);
+		return res.rows;
 	} catch (error) {
 		throw new Error(`Error adding habit: ${error.message}`);
 	}

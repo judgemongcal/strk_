@@ -7,5 +7,5 @@ router.get(
 	habitEntryController.getEntries,
 );
 router.get("/:entryId", habitEntryController.getEntry);
-
+router.post("/", habitEntryController.addEntry);
 module.exports = router;

@@ -36,3 +36,21 @@ exports.getEntry = async (entryId) => {
 		);
 	}
 };
+
+exports.addEntry = async (body) => {
+	const { user_id, habit_id, entry_date, duration } = body;
+	try {
+		const res = await client.query(
+			`
+		INSERT INTO habit_entries (user_id, habit_id, entry_date, duration)
+		VALUES ($1, $2, $3, $4)
+		RETURNING *
+		`,
+			[user_id, habit_id, entry_date, duration],
+		);
+
+		return res.rows;
+	} catch (error) {
+		throw new Error(`Error adding entry: ${error.message}`);
+	}
+};

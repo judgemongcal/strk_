@@ -22,3 +22,15 @@ exports.getEntry = async (req, res) => {
 		res.status(500).json({ error: error.message });
 	}
 };
+
+exports.addEntry = async (req, res) => {
+	try {
+		const entry = await habitEntryModel.addEntry(req.body);
+		res.status(200).json({
+			message: "Entry has been added successfully.",
+			payload: entry,
+		});
+	} catch (error) {
+		res.status(500).json({ error: error.message });
+	}
+};
