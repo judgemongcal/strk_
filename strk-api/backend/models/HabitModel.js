@@ -18,16 +18,19 @@ exports.getHabits = async (id) => {
 	}
 };
 
-exports.getHabit = async (userId, habitId) => {
+exports.getHabit = async (id) => {
 	try {
 		const res = await client.query(
 			`
         SELECT *
         FROM habits
-        WHERE user_id = $1
-        AND   habit_id = $2`,
-			[userId, habitId],
+        WHERE habit_id = $1`,
+			[id],
 		);
+
+		if (res.rowCount === 0) {
+			throw new Error("Habit not found");
+		}
 
 		return res.rows;
 	} catch (error) {

@@ -12,12 +12,9 @@ exports.getHabits = async (req, res) => {
 };
 
 exports.getHabit = async (req, res) => {
+	console.log(req.params.id);
 	try {
-		const { userId, habitId } = req.params;
-		const habit = await habitModel.getHabit(
-			userId,
-			habitId,
-		);
+		const habit = await habitModel.getHabit(req.params.id);
 		res.status(200).json(habit);
 	} catch (error) {
 		res.status(500).json({ message: error.message });
@@ -62,11 +59,9 @@ exports.deleteHabit = async (req, res) => {
 			req.params.user_id,
 			req.params.habit_id,
 		);
-		res
-			.status(200)
-			.json({
-				message: "Habit has been deleted successfully.",
-			});
+		res.status(200).json({
+			message: "Habit has been deleted successfully.",
+		});
 	} catch (error) {
 		res.status(500).json({ message: error.message });
 	}
