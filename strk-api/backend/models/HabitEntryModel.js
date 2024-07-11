@@ -75,3 +75,25 @@ exports.updateEntry = async (body) => {
 		);
 	}
 };
+
+exports.deleteEntry = async (entryId) => {
+	try {
+		const res = await client.query(
+			`
+			DELETE FROM habit_entries
+			WHERE entry_id = $1
+			`,
+			[entryId],
+		);
+
+		if (res.rowCOunt === 0) {
+			throw new Error("Entry not found");
+		}
+
+		return res.rows;
+	} catch (error) {
+		throw new Error(
+			`Error deleting habit: ${error.message}`,
+		);
+	}
+};

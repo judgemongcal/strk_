@@ -9,4 +9,5 @@ router.get(
 router.get("/:entryId", habitEntryController.getEntry);
 router.post("/", habitEntryController.addEntry);
 router.put("/", habitEntryController.updateEntry);
+router.delete("/:id", habitEntryController.deleteEntry);
 module.exports = router;

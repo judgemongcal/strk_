@@ -48,3 +48,16 @@ exports.updateEntry = async (req, res) => {
 		res.status(500).json({ error: error.message });
 	}
 };
+
+exports.deleteEntry = async (req, res) => {
+	try {
+		const entry = await habitEntryModel.deleteEntry(
+			req.params.id,
+		);
+		res.status(200).json({
+			message: "Entry has been deleted successfully",
+		});
+	} catch (error) {
+		res.status(500).json({ error: error.message });
+	}
+};
