@@ -6,9 +6,6 @@ router.get("/:id", habitController.getHabits);
 router.get("/habit/:id", habitController.getHabit);
 router.post("/:id", habitController.addHabit);
 router.put("/:id", habitController.updateHabit);
-router.delete(
-	"/:user_id/habit/:habit_id",
-	habitController.deleteHabit,
-);
+router.delete("/:id", habitController.deleteHabit);
 
 module.exports = router;

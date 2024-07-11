@@ -55,8 +55,7 @@ exports.updateHabit = async (req, res) => {
 exports.deleteHabit = async (req, res) => {
 	try {
 		const habit = await habitModel.deleteHabit(
-			req.params.user_id,
-			req.params.habit_id,
+			req.params.id,
 		);
 		res.status(200).json({
 			message: "Habit has been deleted successfully.",
