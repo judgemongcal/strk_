@@ -40,8 +40,7 @@ exports.addHabit = async (req, res) => {
 exports.updateHabit = async (req, res) => {
 	try {
 		const habit = await habitModel.updateHabit(
-			req.params.user_id,
-			req.params.habit_id,
+			req.params.id,
 			req.body,
 		);
 		res.status(200).json({

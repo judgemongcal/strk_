@@ -56,7 +56,7 @@ exports.addHabit = async (id, habit) => {
 	}
 };
 
-exports.updateHabit = async (user_id, habit_id, habit) => {
+exports.updateHabit = async (id, habit) => {
 	try {
 		const res = await client.query(
 			`
@@ -66,7 +66,7 @@ exports.updateHabit = async (user_id, habit_id, habit) => {
 		AND    habit_id = $3
 		RETURNING *
 		`,
-			[habit.habit_name, user_id, habit_id],
+			[habit.habit_name, habit.user_id, id],
 		);
 
 		if (res.rowCount === 0) {
