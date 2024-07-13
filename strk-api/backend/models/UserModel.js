@@ -1,3 +1,4 @@
+const { user } = require("pg/lib/defaults");
 const { client } = require("../config/dbconfig");
 const bcrypt = require("bcrypt");
 
@@ -126,4 +127,22 @@ exports.createUser = async (data) => {
 	}
 };
 
+exports.getUserByUsername = async (username) => {
+	try {
+		const res = await client.query(
+			`
+		SELECT * 
+		FROM users
+		WHERE username = $1
+		`,
+			[username],
+		);
+
+		return res.rows;
+	} catch (error) {
+		throw new Error(
+			`Error fetching user: ${error.message}`,
+		);
+	}
+};
 // @TODO: Add more calls
