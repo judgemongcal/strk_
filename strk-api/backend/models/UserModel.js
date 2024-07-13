@@ -1,4 +1,5 @@
 const { client } = require("../config/dbconfig");
+const bcrypt = require("bcrypt");
 
 exports.getUsers = async () => {
 	try {
@@ -88,6 +89,39 @@ exports.deleteUser = async (id) => {
 	} catch (error) {
 		throw new Error(
 			`Error deleting user: ${error.message}`,
+		);
+	}
+};
+
+exports.createUser = async (data) => {
+	const {
+		username,
+		email,
+		password,
+		first_name,
+		last_name,
+	} = data;
+	const password_hash = await bcrypt.hash(password, 10);
+	try {
+		const res = await client.query(
+			`
+		INSERT INTO users (username, email, password_hash, first_name, last_name)
+		VALUES ($1, $2, $3, $4, $5)
+		RETURNING *
+		`,
+			[
+				username,
+				email,
+				password_hash,
+				first_name,
+				last_name,
+			],
+		);
+
+		return res.rows;
+	} catch (error) {
+		throw new Error(
+			`Error creating user: ${error.message}`,
 		);
 	}
 };
