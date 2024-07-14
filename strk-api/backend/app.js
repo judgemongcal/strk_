@@ -1,13 +1,16 @@
 require("dotenv").config();
 const express = require("express");
 const app = express();
+const authRoutes = require("./routes/AuthRoutes.js");
 const userRoutes = require("./routes/UserRoutes.js");
 const habitRoutes = require("./routes/HabitRoutes.js");
 const habitEntryRoutes = require("./routes/HabitEntryRoutes.js");
+const { auth } = require("./middleware/auth.js");
 app.use(express.json());
-app.use("/api/users", userRoutes);
-app.use("/api/habits", habitRoutes);
-app.use("/api/entries", habitEntryRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/users", auth, userRoutes);
+app.use("/api/habits", auth, habitRoutes);
+app.use("/api/entries", auth, habitEntryRoutes);
 
 const PORT = process.env.PORT || 5001;
 

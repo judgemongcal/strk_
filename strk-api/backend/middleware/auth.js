@@ -1,14 +1,15 @@
 const jwt = require("jsonwebtoken");
 
 exports.auth = (req, res, next) => {
-	const token = req
-		.header("Authorization")
-		.replace("Bearer ", "");
-	if (!token) {
+	const authHeader = req.header("Authorization");
+
+	if (!authHeader) {
 		return res
 			.status(401)
-			.json({ error: "Access denied. No token provided" });
+			.json({ error: "Access denied. No token provided." });
 	}
+
+	const token = authHeader.replace("Bearer ", "");
 	try {
 		const decoded = jwt.verify(
 			token,
