@@ -17,15 +17,21 @@ exports.register = async (req, res) => {
 
 exports.login = async (req, res) => {
 	const { username, password } = req.body;
+	console.log(username, password);
 	try {
 		const user = await userModel.getUserByUsername(
 			username,
 		);
-		if (!user) {
+
+		console.log(user);
+
+		if (!user || user.length === 0) {
 			return res
 				.status(400)
-				.json({ error: "Invalid username or password" });
+				.json({ error: "Invalid username or password." });
 		}
+
+		console.log("Retrieved user:", user);
 
 		const isMatch = await bcrypt.compare(
 			password,
