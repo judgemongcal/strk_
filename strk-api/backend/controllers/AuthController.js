@@ -32,11 +32,11 @@ exports.login = async (req, res) => {
 		}
 
 		console.log("Retrieved user:", user);
-
 		const isMatch = await bcrypt.compare(
 			password,
 			user.password_hash,
 		);
+
 		if (!isMatch) {
 			return res
 				.status(400)

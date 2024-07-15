@@ -118,7 +118,7 @@ exports.createUser = async (data) => {
 			],
 		);
 
-		return res.rows;
+		return res.rows[0];
 	} catch (error) {
 		throw new Error(
 			`Error creating user: ${error.message}`,
@@ -137,7 +137,7 @@ exports.getUserByUsername = async (username) => {
 			[username],
 		);
 
-		return res.rows;
+		return res.rows[0];
 	} catch (error) {
 		throw new Error(
 			`Error fetching user: ${error.message}`,
