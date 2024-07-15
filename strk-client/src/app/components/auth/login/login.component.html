@@ -1,6 +1,6 @@
 <div class="main-container flex flex-col justify-center items-center">
   <div
-    class="flex flex-col p-8 outline outline-gray-300 outline-1 bg-white w-[90%] h-[350px] rounded-md my-[50%]"
+    class="login-card flex flex-col p-8 outline outline-gray-300 outline-1 text-dark-gray bg-white w-[90%] rounded-md my-[50%]"
   >
     <h1 class="font-bold font-mono text-center mb-2 text-[24px]">
       Welcome back
@@ -9,14 +9,16 @@
       Enter your username and password to sign in to your account.
     </p>
 
-    <div class="form-container flex flex-col justify-center my-[2rem]">
+    <div
+      class="form-container flex flex-col justify-center my-[1rem] text-dark-gray"
+    >
       <form [formGroup]="form" (ngSubmit)="login()" class="flex flex-col gap-2">
         <label for="username" class="w-full">Username</label>
         <input
           type="text"
           name="username"
           formControlName="username"
-          class="outline outline-gray-200 outline-1 rounded-md py-1 px-4 w-full mb-[1rem]"
+          class="outline outline-gray-200 outline-1 rounded-md py-2 px-4 w-full mb-[1rem]"
           placeholder="Enter your username here"
         />
         <label for="password" class="w-full">Password</label>
@@ -24,9 +26,15 @@
           type="password"
           name="password"
           formControlName="password"
-          class="outline outline-gray-200 outline-1 rounded-md py-1 px-4 w-full"
+          class="outline outline-gray-200 outline-1 rounded-md py-2 px-4 w-full mb-[2rem]"
           placeholder="Enter your password here"
         />
+        <button
+          class="w-full p-3 text-white bg-dark-gray rounded-md"
+          type="submit"
+        >
+          Sign In
+        </button>
       </form>
     </div>
   </div>
