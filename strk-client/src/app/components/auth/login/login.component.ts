@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -9,23 +9,15 @@ import {
 import { Router } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
-import { MatFormField } from '@angular/material/form-field';
-import { MatInput, MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [
-    HttpClientModule,
-    ReactiveFormsModule,
-    MatFormField,
-    MatInputModule,
-    MatInput,
-  ],
+  imports: [HttpClientModule, ReactiveFormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   fb = inject(FormBuilder);
   router = inject(Router);
   authService = inject(AuthService);
@@ -34,6 +26,8 @@ export class LoginComponent {
     username: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required]),
   });
+
+  ngOnInit(): void {}
 
   login() {}
 }

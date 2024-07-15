@@ -7,9 +7,8 @@ import { Login } from '../interfaces/login';
 })
 export class AuthService {
   private apiUrl = 'http://localhost:5001/api/auth';
-  private httpClient = inject(HttpClient);
 
-  constructor() {}
+  constructor(private httpClient: HttpClient) {}
 
   async login(creds: Login) {
     const res = await this.httpClient.post(this.apiUrl + '/login', creds);
