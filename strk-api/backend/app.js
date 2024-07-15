@@ -6,6 +6,8 @@ const userRoutes = require("./routes/UserRoutes.js");
 const habitRoutes = require("./routes/HabitRoutes.js");
 const habitEntryRoutes = require("./routes/HabitEntryRoutes.js");
 const { auth } = require("./middleware/auth.js");
+const cors = require("cors");
+app.use(cors());
 app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/users", auth, userRoutes);

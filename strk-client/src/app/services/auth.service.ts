@@ -10,8 +10,7 @@ export class AuthService {
 
   constructor(private httpClient: HttpClient) {}
 
-  async login(creds: Login) {
-    const res = await this.httpClient.post(this.apiUrl + '/login', creds);
-    console.log(res);
+  login(creds: Login) {
+    return this.httpClient.post(this.apiUrl + '/login', creds);
   }
 }
