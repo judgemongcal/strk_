@@ -36,6 +36,7 @@ export class LoginComponent implements OnInit {
         if (data.token) {
           localStorage.setItem('token', data.token);
           // Redirect to home
+          this.router.navigate(['/home']);
         }
       },
       (error: any) => {
