@@ -10,11 +10,15 @@ export class AuthService {
 
   constructor(private httpClient: HttpClient) {}
 
-  login(creds: Login) {
+  signIn(creds: Login) {
     return this.httpClient.post(this.apiUrl + '/login', creds);
   }
 
   isAuthenticated(): boolean {
     return !!localStorage.getItem('token');
+  }
+
+  signOut(): void {
+    localStorage.removeItem('token');
   }
 }

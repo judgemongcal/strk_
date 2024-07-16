@@ -12,7 +12,11 @@
     <div
       class="form-container flex flex-col justify-center my-[1rem] text-dark-gray"
     >
-      <form [formGroup]="form" (ngSubmit)="login()" class="flex flex-col gap-2">
+      <form
+        [formGroup]="form"
+        (ngSubmit)="signIn()"
+        class="flex flex-col gap-2"
+      >
         <label for="username" class="w-full">Username</label>
         <input
           type="text"
