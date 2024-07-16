@@ -33,7 +33,10 @@ export class LoginComponent implements OnInit {
     console.log(this.form.value);
     this.authService.login(this.form.value).subscribe(
       (data: any) => {
-        console.log(data);
+        if (data.token) {
+          localStorage.setItem('token', data.token);
+          // Redirect to home
+        }
       },
       (error: any) => {
         console.log(error);

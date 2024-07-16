@@ -13,4 +13,8 @@ export class AuthService {
   login(creds: Login) {
     return this.httpClient.post(this.apiUrl + '/login', creds);
   }
+
+  isAuthenticated(): boolean {
+    return !!localStorage.getItem('token');
+  }
 }
