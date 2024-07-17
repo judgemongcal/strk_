@@ -1,4 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
+
 import {
   FormBuilder,
   FormControl,
@@ -10,6 +11,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
 import { UsersService } from '../../../services/users.service';
+import { jwtDecode } from 'jwt-decode';
 
 @Component({
   selector: 'app-login',
@@ -36,8 +38,9 @@ export class LoginComponent implements OnInit {
       (data: any) => {
         console.log(data);
         if (data.token) {
+          const decoded: any = jwtDecode(data.token);
           localStorage.setItem('token', data.token);
-          console.log(data);
+          localStorage.setItem('user_id', decoded.userId);
 
           // Redirect to home
           this.router.navigate(['/home']);
