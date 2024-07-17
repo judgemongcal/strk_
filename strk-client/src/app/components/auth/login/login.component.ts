@@ -9,6 +9,7 @@ import {
 import { Router } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
+import { UsersService } from '../../../services/users.service';
 
 @Component({
   selector: 'app-login',
@@ -21,6 +22,7 @@ export class LoginComponent implements OnInit {
   fb = inject(FormBuilder);
   router = inject(Router);
   authService = inject(AuthService);
+  userService = inject(UsersService);
 
   form: FormGroup = this.fb.group({
     username: new FormControl('', [Validators.required]),
@@ -30,11 +32,13 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
 
   signIn() {
-    console.log(this.form.value);
     this.authService.signIn(this.form.value).subscribe(
       (data: any) => {
+        console.log(data);
         if (data.token) {
           localStorage.setItem('token', data.token);
+          console.log(data);
+
           // Redirect to home
           this.router.navigate(['/home']);
         }

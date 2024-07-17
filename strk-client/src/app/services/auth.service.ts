@@ -6,7 +6,7 @@ import { Login } from '../interfaces/login';
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:5001/api/auth';
+  private apiUrl = `http://localhost:5001/api/auth`;
 
   constructor(private httpClient: HttpClient) {}
 
