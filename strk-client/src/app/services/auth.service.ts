@@ -29,5 +29,6 @@ export class AuthService {
 
   signOut(): void {
     localStorage.removeItem('token');
+    localStorage.removeItem('user_id');
   }
 }

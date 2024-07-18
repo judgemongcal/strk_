@@ -17,18 +17,32 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCurrentUser();
+    this.getGreeting();
   }
+
+  lookups: any = {};
 
   getCurrentUser() {
     const user_id: any = localStorage.getItem('user_id');
     this.userService.getUser(user_id).subscribe(
       (data: any) => {
-        console.log(data);
+        this.lookups = data[0];
       },
       (error) => {
         console.error(error);
       }
     );
+  }
+
+  getGreeting(): string {
+    const now = new Date();
+    if (now.getHours() < 12) {
+      return 'Good morning';
+    } else if (now.getHours() >= 12 && now.getHours() < 18) {
+      return 'Good afternoon';
+    } else {
+      return 'Good evening';
+    }
   }
 
   signOut() {
