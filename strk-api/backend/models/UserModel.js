@@ -16,7 +16,7 @@ exports.getUser = async (id) => {
 	try {
 		const res = await client.query(
 			`
-			SELECT *
+			SELECT email, first_name, last_name, user_id, created_at
 			FROM users
 			WHERE user_id = $1`,
 			[id],
@@ -130,7 +130,7 @@ exports.getUserByUsername = async (username) => {
 	try {
 		const res = await client.query(
 			`
-		SELECT * 
+		SELECT *
 		FROM users
 		WHERE username = $1
 		`,
