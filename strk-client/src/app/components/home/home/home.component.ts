@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
 import { UsersService } from '../../../services/users.service';
+import { HabitsService } from '../../../services/habits.service';
 
 @Component({
   selector: 'app-home',
@@ -11,22 +12,39 @@ import { UsersService } from '../../../services/users.service';
   styleUrl: './home.component.css',
 })
 export class HomeComponent implements OnInit {
-  router = inject(Router);
-  authService = inject(AuthService);
-  userService = inject(UsersService);
+  private router = inject(Router);
+  private authService = inject(AuthService);
+  private userService = inject(UsersService);
+  private habitsService = inject(HabitsService);
+  private user_id: any = localStorage.getItem('user_id');
 
   ngOnInit(): void {
     this.getCurrentUser();
-    this.getGreeting();
+    this.getUserHabits();
   }
 
-  lookups: any = {};
+  lookups: any = {
+    user_info: {},
+    habits: {},
+  };
 
   getCurrentUser() {
-    const user_id: any = localStorage.getItem('user_id');
-    this.userService.getUser(user_id).subscribe(
+    this.userService.getUser(this.user_id).subscribe(
       (data: any) => {
-        this.lookups = data[0];
+        this.lookups.user_info = data[0];
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  }
+
+  getUserHabits() {
+    this.habitsService.getHabits(this.user_id).subscribe(
+      (data: any) => {
+        console.log(data);
+        this.lookups.habits = data[0];
+        console.log(this.lookups);
       },
       (error) => {
         console.error(error);
