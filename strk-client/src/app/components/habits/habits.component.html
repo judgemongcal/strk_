@@ -1,11 +1,26 @@
 <div
   class="main-container flex flex-col justify-center items-center mt-[30%] w-80 mx-auto"
 >
+  <div class="flex flex-row justify-between w-full mb-[3rem]">
+    <div
+      class="bg-white p-3 rounded-md outline outline-gray-500 outline-2 cursor-pointer w-fit hover:bg-dark-gray hover:text-white duration-300"
+      (click)="redirectToHome()"
+    >
+      Home 🏠
+    </div>
+  </div>
   <h1 class="font-bold text-[1.5rem] self-center">
     {{ lookups.user_info.first_name }}'s Habits
   </h1>
+
   <div
-    class="habits-container grid grid-cols-1 gap-[1rem] w-full mt-[3rem] mb-[2rem]"
+    class="bg-white p-3 rounded-md outline self-start mt-[2rem] outline-gray-500 outline-2 cursor-pointer w-fit hover:bg-primary hover:outline-primary hover:text-white duration-300"
+  >
+    Add ➕
+  </div>
+
+  <div
+    class="habits-container grid grid-cols-1 gap-[1rem] w-full mt-[2rem] mb-[2rem]"
   >
     <h1
       *ngFor="let habit of lookups.habits"
