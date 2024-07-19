@@ -8,7 +8,7 @@
     class="membership-container grid grid-cols-1 gap-2 w-full mt-[2rem] hover:scale-105 duration-300"
   >
     <div
-      class="w-full bg-white p-3 rounded-md outline outline-gray-500 outline-2 flex flex-row gap-2 duration-300 hover:bg-red-400"
+      class="w-full bg-white p-3 rounded-md outline outline-gray-500 outline-2 flex flex-row gap-2 duration-300 hover:bg-secondary"
     >
       <h1
         class="p-2 w-40 text-center self-center text-[3rem] leading-7 font-bold tracking-wide"
@@ -25,7 +25,7 @@
     class="habit-counter-container grid grid-cols-1 gap-2 w-full mt-[1rem] hover:scale-105 duration-300"
   >
     <div
-      class="w-full bg-white p-3 rounded-md outline outline-gray-500 outline-2 flex flex-col gap-0 justify-center duration-300 hover:bg-cyan-500 cursor-pointer"
+      class="w-full bg-white p-3 rounded-md outline outline-gray-500 outline-2 flex flex-col gap-0 justify-center duration-300 hover:bg-primary cursor-pointer"
       (click)="handleRedirect()"
     >
       <h2 class="p-2 font-medium text-[0.95rem] w-full text-center">
@@ -44,7 +44,7 @@
   >
     <h1
       *ngFor="let habit of lookups.habits"
-      class="bg-white p-3 font-semibold rounded-md outline outline-gray-500 outline-2 cursor-pointer hover:scale-105 text-center hover:bg-red-400 duration-300"
+      class="bg-white p-3 font-semibold rounded-md outline outline-gray-500 outline-2 cursor-pointer hover:scale-105 text-center hover:bg-secondary duration-300"
     >
       {{ habit.habit_name }}
     </h1>
