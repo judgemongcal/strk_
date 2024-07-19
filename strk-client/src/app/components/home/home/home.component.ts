@@ -76,6 +76,12 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  handleRedirect(id: string = '') {
+    if (id === '') {
+      this.router.navigate(['/habits']);
+    }
+  }
+
   signOut() {
     try {
       this.authService.signOut();
