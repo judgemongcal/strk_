@@ -1,1 +1,17 @@
-<p>habits works!</p>
+<div
+  class="main-container flex flex-col justify-center items-center mt-[30%] w-80 mx-auto"
+>
+  <h1 class="font-bold text-[1.5rem] self-center">
+    {{ lookups.user_info.first_name }}'s Habits
+  </h1>
+  <div
+    class="habits-container grid grid-cols-1 gap-[1rem] w-full mt-[3rem] mb-[2rem]"
+  >
+    <h1
+      *ngFor="let habit of lookups.habits"
+      class="bg-white p-3 font-semibold rounded-md outline outline-gray-500 outline-2 cursor-pointer hover:scale-105 text-center hover:bg-secondary duration-300"
+    >
+      {{ habit.habit_name }}
+    </h1>
+  </div>
+</div>
