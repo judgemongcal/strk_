@@ -4,9 +4,11 @@
   <h1 class="font-bold text-[1.5rem] self-center">
     {{ getGreeting() }}, {{ lookups.user_info.first_name }}!
   </h1>
-  <div class="grid grid-cols-1 gap-2 w-full my-[2rem]">
+  <div
+    class="membership-container grid grid-cols-1 gap-2 w-full mt-[2rem] hover:scale-105 duration-300"
+  >
     <div
-      class="w-full bg-white p-3 rounded-md outline outline-gray-500 outline-2 flex flex-row gap-2"
+      class="w-full bg-white p-3 rounded-md outline outline-gray-500 outline-2 flex flex-row gap-2 duration-300 hover:bg-red-400"
     >
       <h1
         class="p-2 w-40 text-center self-center text-[3rem] leading-7 font-bold tracking-wide"
@@ -17,6 +19,23 @@
       <h2 class="p-2 w-60 self-center font-medium text-[0.95rem]">
         since you first started habit strks.
       </h2>
+    </div>
+  </div>
+  <div
+    class="habits-container grid grid-cols-1 gap-2 w-full mt-[1rem] mb-[2rem] hover:scale-105 duration-300"
+  >
+    <div
+      class="w-full bg-white p-3 rounded-md outline outline-gray-500 outline-2 flex flex-col gap-0 justify-center duration-300 hover:bg-cyan-500"
+    >
+      <h2 class="p-2 font-medium text-[0.95rem] w-full text-center">
+        Currently, you are tracking
+      </h2>
+
+      <h1
+        class="p-2 w-full text-center self-center text-[3rem] font-bold tracking-tighter -mt-[1rem]"
+      >
+        {{ lookups.habits.length }} <span class="tracking-wide">habits</span>
+      </h1>
     </div>
   </div>
   <button
