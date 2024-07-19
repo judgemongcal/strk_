@@ -22,7 +22,7 @@
     </div>
   </div>
   <div
-    class="habits-container grid grid-cols-1 gap-2 w-full mt-[1rem] mb-[2rem] hover:scale-105 duration-300"
+    class="habit-counter-container grid grid-cols-1 gap-2 w-full mt-[1rem] hover:scale-105 duration-300"
   >
     <div
       class="w-full bg-white p-3 rounded-md outline outline-gray-500 outline-2 flex flex-col gap-0 justify-center duration-300 hover:bg-cyan-500"
@@ -37,6 +37,16 @@
         {{ lookups.habits.length }} <span class="tracking-wide">habits</span>
       </h1>
     </div>
+  </div>
+  <div
+    class="habits-container grid grid-cols-2 gap-[1rem] w-full mt-[1rem] mb-[2rem] hover:scale-105 duration-300"
+  >
+    <h1
+      *ngFor="let habit of lookups.habits"
+      class="bg-white p-3 font-semibold rounded-md outline outline-gray-500 outline-2 cursor-pointer hover:scale-105 text-center hover:bg-red-400 duration-300"
+    >
+      {{ habit.habit_name }}
+    </h1>
   </div>
   <button
     class="w-full p-3 text-red-700 font-semibold hover:bg-red-700 hover:text-white duration-300 rounded-md"

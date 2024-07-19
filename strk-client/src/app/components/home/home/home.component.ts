@@ -1,4 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
+import { CommonModule, NgFor } from '@angular/common';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
 import { UsersService } from '../../../services/users.service';
@@ -7,7 +8,7 @@ import { HabitsService } from '../../../services/habits.service';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [],
+  imports: [CommonModule, NgFor],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
