@@ -12,5 +12,9 @@ export const routes: Routes = [
   },
   { path: 'home', component: HomeComponent, canActivate: [authGuard] },
   { path: 'habits', component: HabitsComponent, canActivate: [authGuard] },
-  { path: 'add-habit', component: HabitAddComponent, canActivate: [authGuard] },
+  {
+    path: 'add-habit/:id',
+    component: HabitAddComponent,
+    canActivate: [authGuard],
+  },
 ];
