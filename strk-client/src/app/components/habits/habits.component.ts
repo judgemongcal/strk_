@@ -56,4 +56,8 @@ export class HabitsComponent implements OnInit {
   redirectToHome() {
     return this.router.navigate(['/home']);
   }
+
+  redirectToAdd() {
+    return this.router.navigate(['/add-habit']);
+  }
 }
