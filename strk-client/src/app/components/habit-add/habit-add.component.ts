@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { HabitsService } from '../../services/habits.service';
 import {
   FormBuilder,
@@ -16,7 +16,18 @@ import {
   templateUrl: './habit-add.component.html',
   styleUrl: './habit-add.component.css',
 })
-export class HabitAddComponent {
+export class HabitAddComponent implements OnInit {
+  private router = inject(Router);
+  private activatedRoute = inject(ActivatedRoute);
+  private habitsService = inject(HabitsService);
+  private user_id: any = null;
+
+  ngOnInit(): void {
+    this.user_id = this.activatedRoute.params.subscribe((params) => {
+      this.user_id = params['id'];
+    });
+  }
+
   handleBack() {}
 
   handleAdd() {}
