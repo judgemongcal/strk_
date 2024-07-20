@@ -20,8 +20,15 @@ CREATE TABLE IF NOT EXISTS habit_entries(
 	user_id INTEGER REFERENCES users(user_id),
 	habit_id INTEGER REFERENCES habits(habit_id),
 	entry_date DATE,
-	duration INTEGER
+	duration INTEGER,
+	unit_id INT REFERENCES units(unit_id)
 )
 
+
+
+CREATE TABLE IF NOT EXISTS units (
+	unit_id SERIAL PRIMARY KEY,
+	unit_name VARCHAR(50) UNIQUE NOT NULL
+	)
 
 
