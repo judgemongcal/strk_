@@ -2,8 +2,9 @@
 INSERT INTO users (username, email, password_hash,first_name, last_name)
 VALUES		('amysmith', 'amysmith@mail.com', '$2b$12$7kGawwWKl9T8yAIef3Jp6.gNEzfkQ4DZGzytvXrFromBXHNllBZPa', 'Amy', 'Smith')
 			
-INSERT INTO habits (user_id, habit_name)
-VALUES      ('1', 'Reading 📚')
+INSERT INTO habits (user_id, habit_name, unit_id)
+VALUES      ('1', 'Reading 📚', 12),
+			('1', 'Running 🏃🏻', 6)
 			
 			
 INSERT INTO habit_entries (user_id, habit_id, entry_date, duration)
@@ -13,7 +14,7 @@ VALUES      ('1', '1', '2024-08-07', '90'),
 			
 			
 INSERT INTO units (unit_name)
-VALUES  ('minutes'), 
+VALUES   ('minutes'), 
 		 ('hours'), 
 		 ('sessions'), 
 		 ('steps'), 
@@ -23,5 +24,7 @@ VALUES  ('minutes'),
 		 ('sets'),
 		 ('liters'), 
 		 ('kilograms'), 
-		 ('words')
+		 ('words'),
+		 ('pages')
 			
+SELECT * FROM habits
