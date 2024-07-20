@@ -12,4 +12,16 @@ VALUES      ('1', '1', '2024-08-07', '90'),
 			('1', '1', '2024-08-09', '100')
 			
 			
+INSERT INTO units (unit_name)
+VALUES  ('minutes'), 
+		 ('hours'), 
+		 ('sessions'), 
+		 ('steps'), 
+		 ('miles'), 
+		 ('kilometers'), 
+		 ('repetitions'), 
+		 ('sets'),
+		 ('liters'), 
+		 ('kilograms'), 
+		 ('words')
 			
