@@ -24,12 +24,12 @@
         placeholder="Enter new habit's name here"
       />
       <label class="w-full">Unit Measurement</label>
-      <div class="grid grid-cols-3 gap-1">
+      <div class="grid grid-cols-2 gap-[0.5rem] mt-[1rem] mb-[3rem]">
         <p
           *ngFor="let unit of lookups.units"
-          class="outline outline-gray-200 outline-1 rounded-md p-2 w-full"
+          class="outline outline-gray-200 cursor-pointer outline-1 rounded-md p-2 w-full text-center hover:bg-secondary duration-300 hover:text-white hover:outline-secondary"
         >
-          {{ unit.unit_name }}
+          {{ unit.unit_name.toUpperCase() }}
         </p>
       </div>
       <button
