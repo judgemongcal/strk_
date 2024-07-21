@@ -14,7 +14,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/users", auth, userRoutes);
 app.use("/api/habits", auth, habitRoutes);
 app.use("/api/entries", auth, habitEntryRoutes);
-app.use("/api/units", unitRoutes);
+app.use("/api/units", auth, unitRoutes);
 
 const PORT = process.env.PORT || 5001;
 
