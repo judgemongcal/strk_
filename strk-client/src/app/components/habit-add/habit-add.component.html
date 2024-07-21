@@ -23,14 +23,15 @@
         class="outline outline-gray-200 outline-1 rounded-md py-2 px-4 w-full mt-[1rem] mb-[1.5rem]"
         placeholder="Enter new habit's name here"
       />
-      <label for="habit_name" class="w-full">Unit Measurement</label>
-      <input
-        type="text"
-        name="habit_name"
-        formControlName="habit_name"
-        class="outline outline-gray-200 outline-1 rounded-md py-2 px-4 w-full mt-[1rem] mb-[1.5rem]"
-        placeholder="Enter new habit's name here"
-      />
+      <label class="w-full">Unit Measurement</label>
+      <div class="grid grid-cols-3 gap-1">
+        <p
+          *ngFor="let unit of lookups.units"
+          class="outline outline-gray-200 outline-1 rounded-md p-2 w-full"
+        >
+          {{ unit.unit_name }}
+        </p>
+      </div>
       <button
         class="w-full p-3 text-white bg-dark-gray rounded-md hover:bg-primary duration-300"
         type="submit"
