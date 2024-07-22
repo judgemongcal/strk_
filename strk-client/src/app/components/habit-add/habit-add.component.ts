@@ -24,6 +24,7 @@ export class HabitAddComponent implements OnInit {
   private habitsService = inject(HabitsService);
   private unitsService = inject(UnitsService);
   private user_id: any = null;
+  currentUnitId: string = '';
   private fb = inject(FormBuilder);
   form: FormGroup = this.fb.group({
     user_id: new FormControl('', [Validators.required]),
@@ -56,8 +57,9 @@ export class HabitAddComponent implements OnInit {
 
   setUnitId(unitId: string) {
     this.form.get('unit_id')?.setValue(unitId);
-    console.log(this.form.value);
-    console.log(this.form.valid);
+    this.currentUnitId === unitId
+      ? (this.currentUnitId = '')
+      : (this.currentUnitId = unitId);
   }
 
   handleBack() {
