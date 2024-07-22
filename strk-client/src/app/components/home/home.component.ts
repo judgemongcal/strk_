@@ -50,15 +50,12 @@ export class HomeComponent implements OnInit {
       (this.now.getTime() - formattedStartDate) / (1000 * 60 * 60 * 24)
     );
     this.lookups.user_info.member_since = member_since;
-    console.log(this.lookups.user_info);
   }
 
   getUserHabits() {
     this.habitsService.getHabits(this.user_id).subscribe(
       (data: any) => {
-        console.log(data);
         this.lookups.habits = data;
-        console.log(this.lookups);
       },
       (error) => {
         console.error(error);

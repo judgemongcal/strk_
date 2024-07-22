@@ -40,7 +40,7 @@ exports.getHabit = async (id) => {
 	}
 };
 
-exports.addHabit = async (id, habit) => {
+exports.addHabit = async (id, habit, unit_id) => {
 	try {
 		const res = await client.query(
 			`
@@ -48,7 +48,7 @@ exports.addHabit = async (id, habit) => {
 		VALUES ($1, $2)
 		RETURNING *
 		`,
-			[id, habit],
+			[id, habit, unit_id],
 		);
 		return res.rows;
 	} catch (error) {

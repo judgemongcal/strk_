@@ -23,10 +23,11 @@ exports.getHabit = async (req, res) => {
 
 exports.addHabit = async (req, res) => {
 	try {
-		const { user_id, habit_name } = req.body;
+		const { user_id, habit_name, unit_id } = req.body;
 		const habit = await habitModel.addHabit(
 			user_id,
 			habit_name,
+			unit_id,
 		);
 		res.status(200).json({
 			message: "Habit has been added successfully.",

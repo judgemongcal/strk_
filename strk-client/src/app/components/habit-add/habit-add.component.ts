@@ -40,7 +40,6 @@ export class HabitAddComponent implements OnInit {
 
     this.unitsService.getUnits().subscribe((data) => {
       this.lookups.units = data;
-      console.log(this.lookups.units);
     });
   }
 
