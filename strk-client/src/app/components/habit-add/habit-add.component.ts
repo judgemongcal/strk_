@@ -57,6 +57,7 @@ export class HabitAddComponent implements OnInit {
   setUnitId(unitId: string) {
     this.form.get('unit_id')?.setValue(unitId);
     console.log(this.form.value);
+    console.log(this.form.valid);
   }
 
   handleBack() {

@@ -34,8 +34,13 @@
         </p>
       </div>
       <button
-        class="w-full p-3 text-white bg-dark-gray rounded-md hover:bg-primary duration-300"
+        [ngClass]="{
+          'w-full p-3 text-white bg-dark-gray rounded-md duration-300':
+            'hover:bg-primary',
+          'opacity-50': !form.valid
+        }"
         type="submit"
+        [disabled]="!form.valid"
       >
         Add New Habit
       </button>

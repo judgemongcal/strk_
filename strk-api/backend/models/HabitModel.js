@@ -44,8 +44,8 @@ exports.addHabit = async (id, habit, unit_id) => {
 	try {
 		const res = await client.query(
 			`
-		INSERT INTO habits (user_id, habit_name)
-		VALUES ($1, $2)
+		INSERT INTO habits (user_id, habit_name, unit_id)
+		VALUES ($1, $2, $3)
 		RETURNING *
 		`,
 			[id, habit, unit_id],
