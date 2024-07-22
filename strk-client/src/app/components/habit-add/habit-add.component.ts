@@ -26,7 +26,9 @@ export class HabitAddComponent implements OnInit {
   private user_id: any = null;
   private fb = inject(FormBuilder);
   form: FormGroup = this.fb.group({
+    user_id: new FormControl('', [Validators.required]),
     habit_name: new FormControl('', [Validators.required]),
+    unit_id: new FormControl('', [Validators.required]),
   });
 
   lookups: any = {
@@ -36,11 +38,25 @@ export class HabitAddComponent implements OnInit {
   ngOnInit(): void {
     this.user_id = this.activatedRoute.params.subscribe((params) => {
       this.user_id = params['id'];
+      this.setUserId();
     });
 
+    this.getUnits();
+  }
+
+  setUserId() {
+    this.form.get('user_id')?.setValue(this.user_id);
+  }
+
+  getUnits() {
     this.unitsService.getUnits().subscribe((data) => {
       this.lookups.units = data;
     });
+  }
+
+  setUnitId(unitId: string) {
+    this.form.get('unit_id')?.setValue(unitId);
+    console.log(this.form.value);
   }
 
   handleBack() {
@@ -48,6 +64,13 @@ export class HabitAddComponent implements OnInit {
   }
 
   handleAdd() {
-    console.log(this.form.value);
+    this.habitsService.addHabit(this.form.value).subscribe(
+      (data: any) => {
+        console.log(data);
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
   }
 }
