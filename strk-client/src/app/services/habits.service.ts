@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Habit } from '../interfaces/habit';
 
 @Injectable({
   providedIn: 'root',
@@ -10,5 +11,13 @@ export class HabitsService {
 
   getHabits(id: string) {
     return this.httpClient.get(`${this.apiUrl}/${id}`);
+  }
+
+  getHabit(habit_id: string) {
+    return this.httpClient.get(`${this.apiUrl}/habit/${habit_id}`);
+  }
+
+  addHabit(payload: Habit) {
+    return this.httpClient.post(`${this.apiUrl}/`, payload);
   }
 }
