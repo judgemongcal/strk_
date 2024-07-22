@@ -20,4 +20,12 @@ export class HabitsService {
   addHabit(payload: Habit) {
     return this.httpClient.post(`${this.apiUrl}/`, payload);
   }
+
+  updateHabit(habit_id: string, payload: Habit) {
+    return this.httpClient.put(`${this.apiUrl}/${habit_id}`, payload);
+  }
+
+  deleteHabit(habit_id: string) {
+    return this.httpClient.delete(`${this.apiUrl}/${habit_id}`);
+  }
 }
