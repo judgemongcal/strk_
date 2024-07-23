@@ -62,6 +62,7 @@ export class HabitComponent implements OnInit {
       (data: any) => {
         this.lookups.habit = data;
         this.setUnitId(data[0].unit_id);
+        this.form.get('habit_name')?.setValue(data[0].habit_name);
       },
       (error) => {
         console.error(error);
@@ -92,14 +93,18 @@ export class HabitComponent implements OnInit {
   }
 
   setUnitId(unitId: string) {
-    this.form.get('unit_id')?.setValue(unitId);
     this.currentUnitId === unitId
       ? (this.currentUnitId = '')
       : (this.currentUnitId = unitId);
+    this.form.get('unit_id')?.setValue(this.currentUnitId);
   }
 
   setHabitId() {
     this.form.get('user_id')?.setValue(this.habit_id);
+  }
+
+  handleUpdateHabit() {
+    console.log(this.form.value);
   }
 
   handleBack() {

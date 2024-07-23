@@ -25,18 +25,40 @@
       </h1>
     </div>
     <ng-container *ngIf="isEditing">
-      <div class="grid grid-cols-2 gap-[0.5rem] mt-[1rem] mb-[3rem]">
-        <p
-          *ngFor="let unit of lookups.units"
+      <form [formGroup]="form" (ngSubmit)="handleUpdateHabit()">
+        <label for="habit_name" class="w-full">Habit Name </label>
+        <input
+          type="text"
+          name="habit_name"
+          formControlName="habit_name"
+          class="outline outline-gray-200 outline-1 rounded-md py-2 px-4 w-full mt-[1rem] mb-[1.5rem]"
+          placeholder="Enter new habit's name here"
+        />
+        <label class="w-full">Unit Measurement</label>
+        <div class="grid grid-cols-2 gap-[0.5rem] mt-[1rem] mb-[3rem]">
+          <p
+            *ngFor="let unit of lookups.units"
+            [ngClass]="{
+              'outline-gray-200 outline cursor-pointer outline-1 rounded-md p-2 w-full text-center hover:bg-secondary duration-300 hover:text-white hover:outline-secondary': true,
+              'bg-secondary': currentUnitId === unit.unit_id
+            }"
+            (click)="setUnitId(unit.unit_id)"
+          >
+            {{ unit.unit_name.toUpperCase() }}
+          </p>
+        </div>
+        <button
           [ngClass]="{
-            'outline-gray-200 outline cursor-pointer outline-1 rounded-md p-2 w-full text-center hover:bg-secondary duration-300 hover:text-white hover:outline-secondary': true,
-            'bg-secondary': currentUnitId === unit.unit_id
+            'w-full p-3 text-white bg-dark-gray rounded-md duration-300':
+              'hover:bg-primary',
+            'opacity-50': !form.valid
           }"
-          (click)="setUnitId(unit.unit_id)"
+          type="submit"
+          [disabled]="!form.valid"
         >
-          {{ unit.unit_name.toUpperCase() }}
-        </p>
-      </div>
+          Update Habit
+        </button>
+      </form>
     </ng-container>
   </div>
 </div>
