@@ -62,7 +62,7 @@ exports.updateHabit = async (habit_id, habit) => {
 			`
 		UPDATE habits
 		SET    habit_name = $1,
-			   unit_id = $2,
+			   unit_id = $2
 		WHERE  user_id = $3
 		AND    habit_id = $4
 		RETURNING *

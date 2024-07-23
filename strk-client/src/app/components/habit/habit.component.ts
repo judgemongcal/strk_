@@ -103,8 +103,24 @@ export class HabitComponent implements OnInit {
     this.form.get('user_id')?.setValue(this.habit_id);
   }
 
+  refreshHabitData() {
+    this.getHabit();
+    this.getUnits();
+    this.getHabitEntries();
+  }
+
   handleUpdateHabit() {
-    console.log(this.form.value);
+    this.habitsService.updateHabit(this.habit_id, this.form.value).subscribe(
+      (data: any) => {
+        console.log(data);
+        this.toggleEdit();
+        this.setUnitId(this.currentUnitId);
+        this.refreshHabitData();
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
   }
 
   handleBack() {
