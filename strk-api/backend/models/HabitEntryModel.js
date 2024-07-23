@@ -39,15 +39,14 @@ exports.getEntry = async (entryId) => {
 
 exports.addEntry = async (body) => {
 	try {
-		const { user_id, habit_id, entry_date, duration } =
-			body;
+		const { user_id, habit_id, entry_date, measure } = body;
 		const res = await client.query(
 			`
-		INSERT INTO habit_entries (user_id, habit_id, entry_date, duration)
+		INSERT INTO habit_entries (user_id, habit_id, entry_date, measure)
 		VALUES ($1, $2, $3, $4)
 		RETURNING *
 		`,
-			[user_id, habit_id, entry_date, duration],
+			[user_id, habit_id, entry_date, measure],
 		);
 
 		return res.rows;
@@ -58,15 +57,15 @@ exports.addEntry = async (body) => {
 
 exports.updateEntry = async (body) => {
 	try {
-		const { entry_id, duration } = body;
+		const { entry_id, measure } = body;
 		const res = await client.query(
 			`
 			UPDATE habit_entries
-			SET    duration = $1
+			SET    measure = $1
 			WHERE  entry_id = $2
 			RETURNING *
 			`,
-			[duration, entry_id],
+			[measure, entry_id],
 		);
 		return res.rows;
 	} catch (error) {
