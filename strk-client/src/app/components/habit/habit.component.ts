@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { CommonModule, NgFor } from '@angular/common';
+import { CommonModule, NgFor, Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HabitsService } from '../../services/habits.service';
 import {
@@ -21,12 +21,14 @@ import { HabitEntriesService } from '../../services/habit-entries.service';
 })
 export class HabitComponent implements OnInit {
   private router = inject(Router);
+  private location = inject(Location);
   private activatedRoute = inject(ActivatedRoute);
   private habitsService = inject(HabitsService);
   private habitEntriesService = inject(HabitEntriesService);
   private unitsService = inject(UnitsService);
   private habit_id: any = null;
   private user_id: any = localStorage.getItem('user_id');
+  isEditing: boolean = false;
   currentUnitId: string = '';
   private fb = inject(FormBuilder);
   form: FormGroup = this.fb.group({
@@ -59,6 +61,7 @@ export class HabitComponent implements OnInit {
     this.habitsService.getHabit(Number(this.habit_id)).subscribe(
       (data: any) => {
         this.lookups.habit = data;
+        this.setUnitId(data[0].unit_id);
       },
       (error) => {
         console.error(error);
@@ -76,6 +79,7 @@ export class HabitComponent implements OnInit {
     this.habitEntriesService.getEntries(this.user_id, this.habit_id).subscribe(
       (data: any) => {
         this.lookups.entries = data;
+        console.log(this.lookups);
       },
       (error) => {
         console.error(error);
@@ -83,11 +87,22 @@ export class HabitComponent implements OnInit {
     );
   }
 
+  toggleEdit() {
+    this.isEditing = !this.isEditing;
+  }
+
+  setUnitId(unitId: string) {
+    this.form.get('unit_id')?.setValue(unitId);
+    this.currentUnitId === unitId
+      ? (this.currentUnitId = '')
+      : (this.currentUnitId = unitId);
+  }
+
   setHabitId() {
     this.form.get('user_id')?.setValue(this.habit_id);
   }
 
   handleBack() {
-    return this.router.navigate(['/habits']);
+    this.location.back();
   }
 }

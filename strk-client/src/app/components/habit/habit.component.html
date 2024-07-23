@@ -1,1 +1,42 @@
-<p>habit works!</p>
+<div
+  class="main-container flex flex-col justify-center items-center mt-[30%] w-80 mx-auto"
+>
+  <div class="flex flex-row justify-between w-full mb-[3rem]">
+    <div
+      class="bg-white p-3 rounded-md outline outline-gray-500 outline-2 cursor-pointer w-fit hover:bg-dark-gray hover:text-white duration-300"
+      (click)="handleBack()"
+    >
+      Back 👈🏼
+    </div>
+  </div>
+  <div
+    *ngIf="lookups.habit.length > 0"
+    class="flex flex-col gap-2 justify-center"
+  >
+    <div class="habit-name flex flex-row justify-center gap-[2rem]">
+      <h1 class="font-bold text-[1.5rem] self-center">
+        {{ lookups.habit[0].habit_name }}
+      </h1>
+      <h1
+        class="bg-white py-2 px-3 rounded-md outline outline-gray-500 outline-2 cursor-pointer w-fit hover:bg-dark-gray hover:text-white duration-300"
+        (click)="toggleEdit()"
+      >
+        🖋️
+      </h1>
+    </div>
+    <ng-container *ngIf="isEditing">
+      <div class="grid grid-cols-2 gap-[0.5rem] mt-[1rem] mb-[3rem]">
+        <p
+          *ngFor="let unit of lookups.units"
+          [ngClass]="{
+            'outline-gray-200 outline cursor-pointer outline-1 rounded-md p-2 w-full text-center hover:bg-secondary duration-300 hover:text-white hover:outline-secondary': true,
+            'bg-secondary': currentUnitId === unit.unit_id
+          }"
+          (click)="setUnitId(unit.unit_id)"
+        >
+          {{ unit.unit_name.toUpperCase() }}
+        </p>
+      </div>
+    </ng-container>
+  </div>
+</div>
