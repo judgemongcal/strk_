@@ -28,6 +28,7 @@ export class HabitComponent implements OnInit {
   private unitsService = inject(UnitsService);
   private habit_id: any = null;
   private user_id: any = localStorage.getItem('user_id');
+  selectedUnit: any;
   isEditing: boolean = false;
   currentUnitId: string = '';
   private fb = inject(FormBuilder);
@@ -73,6 +74,7 @@ export class HabitComponent implements OnInit {
   getUnits() {
     this.unitsService.getUnits().subscribe((data) => {
       this.lookups.units = data;
+      this.getUnit();
     });
   }
 
@@ -99,6 +101,12 @@ export class HabitComponent implements OnInit {
     this.form.get('unit_id')?.setValue(this.currentUnitId);
   }
 
+  getUnit() {
+    this.selectedUnit = this.lookups.units.find((unit: any) => {
+      return unit.unit_id === this.currentUnitId;
+    });
+  }
+
   setHabitId() {
     this.form.get('user_id')?.setValue(this.habit_id);
   }
@@ -107,6 +115,7 @@ export class HabitComponent implements OnInit {
     this.getHabit();
     this.getUnits();
     this.getHabitEntries();
+    this.getUnit();
   }
 
   handleUpdateHabit() {
