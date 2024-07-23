@@ -132,6 +132,18 @@ export class HabitComponent implements OnInit {
     );
   }
 
+  handleDeleteHabit() {
+    this.habitsService.deleteHabit(this.habit_id).subscribe(
+      (data: any) => {
+        console.log(data);
+        this.handleBack();
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  }
+
   handleBack() {
     this.location.back();
   }
