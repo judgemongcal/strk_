@@ -13,7 +13,7 @@ export class HabitsService {
     return this.httpClient.get(`${this.apiUrl}/${id}`);
   }
 
-  getHabit(habit_id: string) {
+  getHabit(habit_id: number) {
     return this.httpClient.get(`${this.apiUrl}/habit/${habit_id}`);
   }
 

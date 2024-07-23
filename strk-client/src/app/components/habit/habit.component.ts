@@ -38,18 +38,22 @@ export class HabitComponent implements OnInit {
     entries: [],
   };
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getHabitId();
+    this.setHabitId();
+    this.getHabit();
+    this.getUnits();
+    this.getHabitEntries();
+  }
 
-  getUserId() {
+  getHabitId() {
     this.activatedRoute.params.subscribe((params) => {
       this.habit_id = params['id'];
-      this.getHabit();
-      this.setHabitId();
     });
   }
 
   getHabit() {
-    this.habitsService.getHabit(this.habit_id).subscribe(
+    this.habitsService.getHabit(Number(this.habit_id)).subscribe(
       (data: any) => {
         this.lookups.habit = data;
       },
@@ -58,6 +62,14 @@ export class HabitComponent implements OnInit {
       }
     );
   }
+
+  getUnits() {
+    this.unitsService.getUnits().subscribe((data) => {
+      this.lookups.units = data;
+    });
+  }
+
+  getHabitEntries() {}
 
   setHabitId() {
     this.form.get('user_id')?.setValue(this.habit_id);
