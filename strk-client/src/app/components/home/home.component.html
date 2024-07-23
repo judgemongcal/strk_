@@ -42,6 +42,7 @@
     <h1
       *ngFor="let habit of lookups.habits"
       class="bg-white p-3 font-semibold rounded-md outline outline-gray-500 outline-2 cursor-pointer hover:scale-105 text-center hover:bg-secondary duration-300"
+      (click)="handleRedirect(habit.habit_id)"
     >
       {{ habit.habit_name }}
     </h1>

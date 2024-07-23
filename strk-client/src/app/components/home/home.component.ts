@@ -76,6 +76,8 @@ export class HomeComponent implements OnInit {
   handleRedirect(id: string = '') {
     if (id === '') {
       this.router.navigate(['/habits']);
+    } else {
+      this.router.navigate([`/habit/${id}`]);
     }
   }
 

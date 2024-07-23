@@ -4,6 +4,7 @@ import { HomeComponent } from './components/home/home.component';
 import { authGuard } from './guards/auth-guard.guard';
 import { HabitsComponent } from './components/habits/habits.component';
 import { HabitAddComponent } from './components/habit-add/habit-add.component';
+import { HabitComponent } from './components/habit/habit.component';
 
 export const routes: Routes = [
   {
@@ -15,6 +16,11 @@ export const routes: Routes = [
   {
     path: 'add-habit/:id',
     component: HabitAddComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'habit/:id',
+    component: HabitComponent,
     canActivate: [authGuard],
   },
 ];
