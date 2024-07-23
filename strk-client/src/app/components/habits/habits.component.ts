@@ -60,4 +60,8 @@ export class HabitsComponent implements OnInit {
   redirectToAdd() {
     return this.router.navigate([`/add-habit/${this.user_id}`]);
   }
+
+  handleRedirect(id: string) {
+    return this.router.navigate([`/habit/${id}`]);
+  }
 }
