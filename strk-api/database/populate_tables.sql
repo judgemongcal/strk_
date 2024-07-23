@@ -7,7 +7,7 @@ VALUES      ('1', 'Reading 📚', 12),
 			('1', 'Running 🏃🏻', 6)
 			
 			
-INSERT INTO habit_entries (user_id, habit_id, entry_date, duration)
+INSERT INTO habit_entries (user_id, habit_id, entry_date, measure)
 VALUES      ('1', '1', '2024-08-07', '90'),
 			('1', '1', '2024-08-08', '40'),
 			('1', '1', '2024-08-09', '100')

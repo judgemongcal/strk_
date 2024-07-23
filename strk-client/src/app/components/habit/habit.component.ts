@@ -10,6 +10,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { UnitsService } from '../../services/units.service';
+import { HabitEntriesService } from '../../services/habit-entries.service';
 
 @Component({
   selector: 'app-habit',
@@ -22,8 +23,10 @@ export class HabitComponent implements OnInit {
   private router = inject(Router);
   private activatedRoute = inject(ActivatedRoute);
   private habitsService = inject(HabitsService);
+  private habitEntriesService = inject(HabitEntriesService);
   private unitsService = inject(UnitsService);
   private habit_id: any = null;
+  private user_id: any = localStorage.getItem('user_id');
   currentUnitId: string = '';
   private fb = inject(FormBuilder);
   form: FormGroup = this.fb.group({
@@ -69,7 +72,16 @@ export class HabitComponent implements OnInit {
     });
   }
 
-  getHabitEntries() {}
+  getHabitEntries() {
+    this.habitEntriesService.getEntries(this.user_id, this.habit_id).subscribe(
+      (data: any) => {
+        this.lookups.entries = data;
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  }
 
   setHabitId() {
     this.form.get('user_id')?.setValue(this.habit_id);
