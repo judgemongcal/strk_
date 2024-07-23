@@ -23,7 +23,7 @@ export class HabitComponent implements OnInit {
   private activatedRoute = inject(ActivatedRoute);
   private habitsService = inject(HabitsService);
   private unitsService = inject(UnitsService);
-  private user_id: any = null;
+  private habit_id: any = null;
   currentUnitId: string = '';
   private fb = inject(FormBuilder);
   form: FormGroup = this.fb.group({
@@ -42,18 +42,25 @@ export class HabitComponent implements OnInit {
 
   getUserId() {
     this.activatedRoute.params.subscribe((params) => {
-      this.user_id = params['id'];
+      this.habit_id = params['id'];
       this.getHabit();
-      this.setUserId();
+      this.setHabitId();
     });
   }
 
-  getHabit(){
-    this.
+  getHabit() {
+    this.habitsService.getHabit(this.habit_id).subscribe(
+      (data: any) => {
+        this.lookups.habit = data;
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
   }
 
-  setUserId() {
-    this.form.get('user_id')?.setValue(this.user_id);
+  setHabitId() {
+    this.form.get('user_id')?.setValue(this.habit_id);
   }
 
   handleBack() {
