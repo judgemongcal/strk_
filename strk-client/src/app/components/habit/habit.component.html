@@ -13,26 +13,32 @@
     *ngIf="lookups.habit.length > 0"
     class="flex flex-col gap-2 justify-center"
   >
-    <div class="habit-name flex flex-row justify-center gap-[2rem]">
+    <div
+      class="habit-name flex flex-col justify-center gap-[1.5rem] items-center"
+    >
       <h1 class="font-bold text-[1.5rem] self-center">
         {{ lookups.habit[0].habit_name }}
       </h1>
+
+      <h1 class="self-center">
+        Measured in
+        <span
+          *ngIf="selectedUnit"
+          class="bg-secondary rounded-md py-1 px-3 w-fit text-center"
+        >
+          {{ selectedUnit.unit_name }}
+        </span>
+      </h1>
       <h1
-        class="bg-white py-2 px-3 rounded-md outline outline-gray-500 outline-2 cursor-pointer w-fit hover:bg-dark-gray hover:text-white duration-300"
+        [ngClass]="{
+          ' py-2 px-3 rounded-md outline outline-gray-500 outline-2 cursor-pointer w-fit hover:bg-dark-gray hover:text-white duration-300': true,
+          'bg-dark-gray text-white': isEditing === true
+        }"
         (click)="toggleEdit()"
       >
-        🖋️
+        Options
       </h1>
     </div>
-    <h1 class="self-center my-[2rem]">
-      Measured in
-      <span
-        *ngIf="selectedUnit"
-        class="bg-secondary rounded-md py-1 px-3 w-fit text-center"
-      >
-        {{ selectedUnit.unit_name }}
-      </span>
-    </h1>
     <ng-container *ngIf="isEditing">
       <form [formGroup]="form" (ngSubmit)="handleUpdateHabit()">
         <label for="habit_name" class="w-full">Habit Name </label>
