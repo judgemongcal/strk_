@@ -12,6 +12,7 @@ import {
 import { UnitsService } from '../../services/units.service';
 import { HabitEntriesService } from '../../services/habit-entries.service';
 import CalHeatmap from 'cal-heatmap';
+import 'cal-heatmap/cal-heatmap.css';
 
 @Component({
   selector: 'app-habit',
@@ -96,91 +97,115 @@ export class HabitComponent implements OnInit {
   }
 
   initCalHeatMap(): void {
-    const transformedData = this.transformEntryData(this.lookups.entries);
+    const transformedData = JSON.parse(
+      JSON.stringify(this.transformEntryData(this.lookups.entries))
+    );
+
     const entryDates = this.lookups.entries.map(
       (entry: any) => new Date(entry.entry_date)
     );
-    console.log(transformedData);
+    const earliestEntryDate = new Date(Math.min(...entryDates));
+    console.log(earliestEntryDate);
+    console.log(typeof transformedData);
     console.log(entryDates);
-    // this.calHeatMap.paint(
-    //   {
-    //     data: {
-    //       source: '../fixtures/seattle-weather.csv',
-    //       type: 'csv',
-    //       x: 'date',
-    //       y: (d) => +d['temp_max'],
-    //       groupY: 'max',
-    //     },
-    //     date: { start: new Date('2012-01-01') },
-    //     range: 12,
-    //     scale: {
-    //       color: {
-    //         type: 'threshold',
-    //         range: ['#14432a', '#166b34', '#37a446', '#4dd05a'],
-    //         domain: [10, 20, 30],
-    //       },
-    //     },
-    //     domain: {
-    //       type: 'month',
-    //       gutter: 4,
-    //       label: { text: 'MMM', textAlign: 'start', position: 'top' },
-    //     },
-    //     subDomain: {
-    //       type: 'ghDay',
-    //       radius: 2,
-    //       width: 11,
-    //       height: 11,
-    //       gutter: 4,
-    //     },
-    //     itemSelector: '#ex-ghDay',
-    //   },
-    //   [
-    //     [
-    //       Tooltip,
-    //       {
-    //         text: function (date, value, dayjsDate) {
-    //           return (
-    //             (value ? value : 'No') +
-    //             ' contributions on ' +
-    //             dayjsDate.format('dddd, MMMM D, YYYY')
-    //           );
-    //         },
-    //       },
-    //     ],
-    //     [
-    //       LegendLite,
-    //       {
-    //         includeBlank: true,
-    //         itemSelector: '#ex-ghDay-legend',
-    //         radius: 2,
-    //         width: 11,
-    //         height: 11,
-    //         gutter: 4,
-    //       },
-    //     ],
-    //     [
-    //       CalendarLabel,
-    //       {
-    //         width: 30,
-    //         textAlign: 'start',
-    //         text: () =>
-    //           dayjs.weekdaysShort().map((d, i) => (i % 2 == 0 ? '' : d)),
-    //         padding: [25, 0, 0, 0],
-    //       },
-    //     ],
-    //   ]
-    // );
+    this.calHeatMap.paint(
+      {
+        data: {
+          source: transformedData,
+          type: 'json',
+          x: 'date',
+          y: (d: any) => +d['temp_max'],
+          groupY: 'max',
+        },
+        date: { start: earliestEntryDate },
+        range: 12,
+        scale: {
+          color: {
+            type: 'threshold',
+            scheme: 'brbg',
+            domain: [10, 20, 30],
+          },
+        },
+        domain: {
+          type: 'month',
+          gutter: 4,
+          label: { text: 'MMM', textAlign: 'start', position: 'top' },
+        },
+        subDomain: {
+          type: 'ghDay',
+          radius: 2,
+          width: 11,
+          height: 11,
+          gutter: 4,
+        },
+        itemSelector: '#cal-heatmap',
+      },
+      [
+        // [LegendLite, { itemSelector: '#ex-stock-legend', includeBlank: true }],
+        // [
+        //   Tooltip,
+        //   {
+        //     text: function (date, value, dayjsDate) {
+        //       return (
+        //         (value ? d3.format(',')(value) : 'No volume') +
+        //         ' on ' +
+        //         dayjsDate.format('dddd LL')
+        //       );
+        //     },
+        //   },
+        // ],
+      ]
+      // [
+      //   [
+      //     Tooltip,
+      //     {
+      //       text: function (date, value, dayjsDate) {
+      //         return (
+      //           (value ? value : 'No') +
+      //           ' contributions on ' +
+      //           dayjsDate.format('dddd, MMMM D, YYYY')
+      //         );
+      //       },
+      //     },
+      //   ],
+      //   [
+      //     LegendLite,
+      //     {
+      //       includeBlank: true,
+      //       itemSelector: '#ex-ghDay-legend',
+      //       radius: 2,
+      //       width: 11,
+      //       height: 11,
+      //       gutter: 4,
+      //     },
+      //   ],
+      //   [
+      //     CalendarLabel,
+      //     {
+      //       width: 30,
+      //       textAlign: 'start',
+      //       text: () =>
+      //         dayjs.weekdaysShort().map((d, i) => (i % 2 == 0 ? '' : d)),
+      //       padding: [25, 0, 0, 0],
+      //     },
+      //   ],
+      // ]
+    );
   }
 
-  transformEntryData(data: any[]): { [key: number]: number } {
-    const transformedData: { [key: number]: number } = {};
+  transformEntryData(data: any[]): { date: string; value: number }[] {
+    const transformedData: any[] = [];
 
     data.forEach((entry) => {
-      const timestamp = Math.floor(new Date(entry.entry_date).getTime() / 1000);
-      if (transformedData[timestamp]) {
-        transformedData[timestamp] += entry.measure;
+      const date = new Date(entry.entry_date).toISOString().split('T')[0];
+      const existingEntry = transformedData.find(
+        (item: any) => item.date === date
+      );
+
+      if (existingEntry) {
+        existingEntry.value += entry.measure;
       } else {
-        transformedData[timestamp] = entry.measure;
+        transformedData.push({ date: date, value: entry.measure });
       }
     });
 

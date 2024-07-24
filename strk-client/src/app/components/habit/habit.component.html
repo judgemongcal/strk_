@@ -86,4 +86,11 @@
       </form>
     </ng-container>
   </div>
+
+  <div
+    *ngIf="this.lookups.entries"
+    class="bg-[#c9ccd0] color-[#2adac7] rounded-md p-[1rem] overflow-hidden"
+  >
+    <div id="cal-heatmap" class="text-white"></div>
+  </div>
 </div>
