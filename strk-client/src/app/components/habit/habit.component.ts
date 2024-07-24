@@ -11,6 +11,7 @@ import {
 } from '@angular/forms';
 import { UnitsService } from '../../services/units.service';
 import { HabitEntriesService } from '../../services/habit-entries.service';
+import CalHeatmap from 'cal-heatmap';
 
 @Component({
   selector: 'app-habit',
@@ -28,9 +29,12 @@ export class HabitComponent implements OnInit {
   private unitsService = inject(UnitsService);
   private habit_id: any = null;
   private user_id: any = localStorage.getItem('user_id');
+  calHeatMap = inject(CalHeatmap);
+  entryRawData: any[] = [];
   selectedUnit: any;
   isEditing: boolean = false;
   currentUnitId: string = '';
+
   private fb = inject(FormBuilder);
   form: FormGroup = this.fb.group({
     user_id: new FormControl('', [Validators.required]),
@@ -88,6 +92,21 @@ export class HabitComponent implements OnInit {
         console.error(error);
       }
     );
+  }
+
+  transformEntryData(data: any[]): { [key: number]: number } {
+    const transformedData: { [key: number]: number } = {};
+
+    data.forEach((entry) => {
+      const timestamp = Math.floor(new Date(entry.entry_date).getTime() / 1000);
+      if (transformedData[timestamp]) {
+        transformedData[timestamp] += 1;
+      } else {
+        transformedData[timestamp] = 1;
+      }
+    });
+
+    return transformedData;
   }
 
   toggleEdit() {
