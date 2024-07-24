@@ -1,0 +1,8 @@
+/* Hide scrollbar track */
+::-webkit-scrollbar {
+  width: 0; /*Adjust width for horizontal scrollbars */
+}
+
+Hide scrollbar thumb ::-webkit-scrollbar-thumb {
+  background: transparent; /* Make thumb transparent */
+}
