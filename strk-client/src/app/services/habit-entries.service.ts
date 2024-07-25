@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Entry } from '../interfaces/entry';
 
 @Injectable({
   providedIn: 'root',
@@ -10,5 +11,9 @@ export class HabitEntriesService {
 
   getEntries(user_id: string, habit_id: string) {
     return this.httpClient.get(`${this.apiUrl}/${user_id}/habit/${habit_id}`);
+  }
+
+  addEntry(entry: Entry) {
+    return this.httpClient.post(`${this.apiUrl}/`, entry);
   }
 }
