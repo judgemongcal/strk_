@@ -31,7 +31,7 @@
       </h1>
       <h1
         [ngClass]="{
-          ' py-2 px-3 rounded-md outline outline-gray-500 outline-2 cursor-pointer w-fit hover:bg-dark-gray hover:text-white duration-300': true,
+          ' py-2 px-3 rounded-md outline outline-gray-200 outline-2 cursor-pointer w-fit text-[0.75rem] hover:bg-dark-gray hover:text-white duration-300': true,
           'bg-dark-gray text-white': isEditing === true
         }"
         (click)="toggleEdit()"
@@ -40,7 +40,11 @@
       </h1>
     </div>
     <ng-container *ngIf="isEditing">
-      <form [formGroup]="form" (ngSubmit)="handleUpdateHabit()">
+      <form
+        [formGroup]="form"
+        (ngSubmit)="handleUpdateHabit()"
+        class="w-[40%] mx-auto"
+      >
         <label for="habit_name" class="w-full">Habit Name </label>
         <input
           type="text"
@@ -85,11 +89,19 @@
         </div>
       </form>
     </ng-container>
+
     <div
       *ngIf="this.lookups.entries"
-      class="color-[#2adac7] rounded-md p-[1rem] mt-[2rem] w-[50%] mx-auto outline-gray-400 outline outline-1 scroll"
+      class="color-[#2adac7] rounded-md p-[0.75rem] mt-[2rem] w-[40%] mx-auto outline-gray-500 outline outline-1 scroll"
     >
       <div id="cal-heatmap" class="text-dark-gray overflow-x-scroll"></div>
+    </div>
+    <div class="controls flex flex-rows justify-evenly">
+      <h1
+        class="outline-gray-500 outline outline-1 p-[0.5rem] rounded-md hover:bg-dark-gray hover:outline-dark-gray hover:text-white duration-300 cursor-pointer text-[0.75rem]"
+      >
+        Past Year
+      </h1>
     </div>
   </div>
 </div>
