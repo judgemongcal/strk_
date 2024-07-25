@@ -72,4 +72,10 @@ export class EntryAddComponent implements OnInit {
       this.lookups.units = data;
     });
   }
+
+  handleAdd() {}
+
+  handleBack() {
+    this.location.back();
+  }
 }
