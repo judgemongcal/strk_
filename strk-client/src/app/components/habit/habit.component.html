@@ -20,24 +20,29 @@
         {{ lookups.habit[0].habit_name }}
       </h1>
 
-      <h1 class="self-center">
+      <h1 *ngIf="selectedUnit" class="self-center">
         Measured in
-        <span
-          *ngIf="selectedUnit"
-          class="bg-secondary rounded-md py-1 px-3 w-fit text-center"
-        >
+        <span class="bg-secondary rounded-md py-1 px-3 w-fit text-center">
           {{ selectedUnit.unit_name }}
         </span>
       </h1>
-      <h1
-        [ngClass]="{
-          ' py-2 px-3 rounded-md outline outline-gray-200 outline-2 cursor-pointer w-fit text-[0.75rem] hover:bg-dark-gray hover:text-white duration-300': true,
-          'bg-dark-gray text-white': isEditing === true
-        }"
-        (click)="toggleEdit()"
-      >
-        Options
-      </h1>
+      <div class="flex flex-row gap-2 justify-center">
+        <h1
+          class="py-2 px-3 rounded-md outline outline-gray-200 outline-2 cursor-pointer w-fit text-[0.75rem] hover:bg-primary hover:outline-primary hover:text-white duration-300"
+          (click)="handleRedirectAdd()"
+        >
+          Add Entry
+        </h1>
+        <h1
+          [ngClass]="{
+            ' py-2 px-3 rounded-md outline outline-gray-200 outline-2 cursor-pointer w-fit text-[0.75rem] hover:bg-dark-gray hover:text-white duration-300': true,
+            'bg-dark-gray text-white': isEditing === true
+          }"
+          (click)="toggleEdit()"
+        >
+          Options
+        </h1>
+      </div>
     </div>
     <ng-container *ngIf="isEditing">
       <form

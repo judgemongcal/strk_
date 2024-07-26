@@ -214,6 +214,10 @@ export class HabitComponent implements OnInit {
     );
   }
 
+  handleRedirectAdd() {
+    this.router.navigate([`/add-entry/${this.habit_id}`]);
+  }
+
   handleBack() {
     this.location.back();
   }
