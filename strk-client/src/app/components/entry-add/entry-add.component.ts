@@ -51,12 +51,13 @@ export class EntryAddComponent implements OnInit {
 
   getHabitId() {
     this.activatedRoute.params.subscribe((params) => {
-      this.habit_id = params['id'];
+      this.habit_id = params['habitId'];
       this.form.get('habit_id')?.setValue(params['id']);
     });
   }
 
   getHabit() {
+    console.log(this.habit_id);
     this.habitsService.getHabit(Number(this.habit_id)).subscribe(
       (data: any) => {
         this.lookups.habit = data;

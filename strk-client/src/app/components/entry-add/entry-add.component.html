@@ -15,11 +15,11 @@
     class="form-container grid grid-cols-1 gap-[1rem] w-full mt-[2rem] mb-[2rem]"
   >
     <form [formGroup]="form" (ngSubmit)="handleAdd()">
-      <label for="habit_name" class="w-full">Measure </label>
+      <label for="measure" class="w-full">Measure </label>
       <input
         type="number"
-        name="habit_name"
-        formControlName="habit_name"
+        name="measure"
+        formControlName="measure"
         class="outline outline-gray-200 outline-1 rounded-md py-2 px-4 w-full mt-[1rem] mb-[1.5rem]"
         placeholder="Enter new habit's name here"
       />
