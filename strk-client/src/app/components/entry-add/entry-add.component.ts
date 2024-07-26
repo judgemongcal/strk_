@@ -31,7 +31,7 @@ export class EntryAddComponent implements OnInit {
   private user_id: any = localStorage.getItem('user_id');
 
   form: FormGroup = this.fb.group({
-    user_id: new FormControl(0, [Validators.required]),
+    user_id: new FormControl(this.user_id, [Validators.required]),
     habit_id: new FormControl(0, [Validators.required]),
     entry_date: new FormControl('', [Validators.required]),
     measure: new FormControl(0, [Validators.required]),
@@ -52,12 +52,11 @@ export class EntryAddComponent implements OnInit {
   getHabitId() {
     this.activatedRoute.params.subscribe((params) => {
       this.habit_id = params['habitId'];
-      this.form.get('habit_id')?.setValue(params['id']);
+      this.form.get('habit_id')?.setValue(this.habit_id);
     });
   }
 
   getHabit() {
-    console.log(this.habit_id);
     this.habitsService.getHabit(Number(this.habit_id)).subscribe(
       (data: any) => {
         this.lookups.habit = data;
@@ -74,7 +73,16 @@ export class EntryAddComponent implements OnInit {
     });
   }
 
-  handleAdd() {}
+  handleAdd() {
+    this.habitEntriesService.addEntry(this.form.value).subscribe(
+      (data: any) => {
+        this.handleBack();
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  }
 
   handleBack() {
     this.location.back();
