@@ -1,1 +1,47 @@
-<p>entry-add works!</p>
+<div
+  class="main-container flex flex-col justify-center items-center mt-[30%] w-80 mx-auto"
+>
+  <div class="flex flex-row justify-between w-full mb-[3rem]">
+    <div
+      class="bg-white p-3 rounded-md outline outline-gray-500 outline-2 cursor-pointer w-fit hover:bg-dark-gray hover:text-white duration-300"
+      (click)="handleBack()"
+    >
+      Back 👈🏼
+    </div>
+  </div>
+  <h1 class="font-bold text-[1.5rem] self-center">Add New Entry</h1>
+
+  <div
+    class="form-container grid grid-cols-1 gap-[1rem] w-full mt-[2rem] mb-[2rem]"
+  >
+    <form [formGroup]="form" (ngSubmit)="handleAdd()">
+      <label for="measure" class="w-full">Measure </label>
+      <input
+        type="number"
+        name="measure"
+        formControlName="measure"
+        class="outline outline-gray-200 outline-1 rounded-md py-2 px-4 w-full mt-[1rem] mb-[1.5rem]"
+        placeholder="Enter new habit's name here"
+      />
+      <label for="entry-date" class="w-full">Entry Date</label>
+      <input
+        type="date"
+        name="entry_date"
+        formControlName="entry_date"
+        class="outline outline-gray-200 outline-1 rounded-md py-2 px-4 w-full mt-[1rem] mb-[1.5rem]"
+      />
+
+      <button
+        [ngClass]="{
+          'w-full p-3 text-white bg-dark-gray rounded-md duration-300':
+            'hover:bg-primary',
+          'opacity-50': !form.valid
+        }"
+        type="submit"
+        [disabled]="!form.valid"
+      >
+        Add New Entry
+      </button>
+    </form>
+  </div>
+</div>

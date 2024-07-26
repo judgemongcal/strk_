@@ -108,37 +108,40 @@ export class HabitComponent implements OnInit {
     console.log(earliestEntryDate);
     console.log(transformedData);
     console.log(entryDates);
-    this.calHeatMap.paint({
-      data: {
-        source: transformedData,
-        x: 'date',
-        y: 'value',
-        groupY: 'max',
-      },
-      date: { start: earliestEntryDate },
-      range: 12,
-      scale: {
-        color: {
-          type: 'threshold',
-          scheme: 'brbg',
-          domain: [10, 20, 30, 40, 50],
+    this.calHeatMap.paint(
+      {
+        data: {
+          source: transformedData,
+          x: 'date',
+          y: 'value',
+          groupY: 'max',
         },
+        date: { start: earliestEntryDate },
+        range: 12,
+        scale: {
+          color: {
+            type: 'threshold',
+            scheme: 'brbg',
+            domain: [10, 20, 30, 40, 50],
+          },
+        },
+        domain: {
+          type: 'month',
+          gutter: 4,
+          label: { text: 'MMM', textAlign: 'start', position: 'top' },
+        },
+        subDomain: {
+          type: 'ghDay',
+          radius: 2,
+          width: 11,
+          height: 11,
+          gutter: 4,
+        },
+        itemSelector: '#cal-heatmap',
+        theme: 'light',
       },
-      domain: {
-        type: 'month',
-        gutter: 4,
-        label: { text: 'MMM', textAlign: 'start', position: 'top' },
-      },
-      subDomain: {
-        type: 'ghDay',
-        radius: 2,
-        width: 11,
-        height: 11,
-        gutter: 4,
-      },
-      itemSelector: '#cal-heatmap',
-      theme: 'light',
-    });
+      []
+    );
   }
 
   transformEntryData(data: any[]): { date: string; value: number }[] {
@@ -212,6 +215,10 @@ export class HabitComponent implements OnInit {
         console.error(error);
       }
     );
+  }
+
+  handleRedirectAdd() {
+    this.router.navigate([`/add-entry/${this.habit_id}`]);
   }
 
   handleBack() {

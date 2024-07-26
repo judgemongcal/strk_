@@ -48,7 +48,6 @@ exports.editUser = async (req, res) => {
 };
 
 exports.deleteUser = async (req, res) => {
-	console.log(req);
 	try {
 		const user = await appModel.deleteUser(req.params.id);
 		res.status(200).json({
