@@ -12,6 +12,7 @@ import {
 import { UnitsService } from '../../services/units.service';
 import { HabitEntriesService } from '../../services/habit-entries.service';
 import CalHeatmap from 'cal-heatmap';
+import { Tooltip } from 'cal-heatmap/plugins';
 import 'cal-heatmap/cal-heatmap.css';
 
 @Component({

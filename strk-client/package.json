@@ -19,6 +19,7 @@
     "@angular/platform-browser": "^17.2.0",
     "@angular/platform-browser-dynamic": "^17.2.0",
     "@angular/router": "^17.2.0",
+    "@types/cal-heatmap": "^3.5.39",
     "cal-heatmap": "^4.2.4",
     "jwt-decode": "^4.0.0",
     "rxjs": "~7.8.0",
