@@ -48,6 +48,7 @@ export class HabitComponent implements OnInit {
     units: [],
     habit: [],
     entries: [],
+    total_activity: 0,
   };
 
   ngOnInit(): void {
@@ -88,7 +89,11 @@ export class HabitComponent implements OnInit {
     this.habitEntriesService.getEntries(this.user_id, this.habit_id).subscribe(
       (data: any) => {
         this.lookups.entries = data;
-        console.log(this.lookups);
+
+        data.forEach((entry: any) => {
+          this.lookups.total_activity += entry.measure;
+        });
+        console.log(this.lookups.total_activity);
         this.initCalHeatMap();
       },
       (error) => {

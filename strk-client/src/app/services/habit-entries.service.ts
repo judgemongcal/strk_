@@ -16,4 +16,8 @@ export class HabitEntriesService {
   addEntry(entry: Entry) {
     return this.httpClient.post(`${this.apiUrl}/`, entry);
   }
+
+  deleteEntry(entry_id: string) {
+    return this.httpClient.delete(`${this.apiUrl}/${entry_id}`);
+  }
 }

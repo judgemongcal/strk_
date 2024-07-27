@@ -36,7 +36,6 @@ export class LoginComponent implements OnInit {
   signIn() {
     this.authService.signIn(this.form.value).subscribe(
       (data: any) => {
-        console.log(data);
         if (data.token) {
           const decoded: any = jwtDecode(data.token);
           localStorage.setItem('token', data.token);
