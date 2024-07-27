@@ -12,7 +12,6 @@ exports.getHabits = async (req, res) => {
 };
 
 exports.getHabit = async (req, res) => {
-	console.log(req.params.id);
 	try {
 		const habit = await habitModel.getHabit(req.params.id);
 		res.status(200).json(habit);
