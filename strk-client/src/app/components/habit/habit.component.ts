@@ -11,8 +11,7 @@ import {
 } from '@angular/forms';
 import { UnitsService } from '../../services/units.service';
 import { HabitEntriesService } from '../../services/habit-entries.service';
-import CalHeatmap from 'cal-heatmap';
-import { Tooltip } from 'cal-heatmap/plugins';
+import CalHeatMap from 'cal-heatmap';
 import 'cal-heatmap/cal-heatmap.css';
 
 @Component({
@@ -31,7 +30,7 @@ export class HabitComponent implements OnInit {
   private unitsService = inject(UnitsService);
   private habit_id: any = null;
   private user_id: any = localStorage.getItem('user_id');
-  calHeatMap = new CalHeatmap();
+  calHeatMap = new CalHeatMap();
   entryRawData: any[] = [];
   selectedUnit: any;
   isEditing: boolean = false;
@@ -48,7 +47,6 @@ export class HabitComponent implements OnInit {
     units: [],
     habit: [],
     entries: [],
-    total_activity: 0,
   };
 
   ngOnInit(): void {
@@ -89,11 +87,7 @@ export class HabitComponent implements OnInit {
     this.habitEntriesService.getEntries(this.user_id, this.habit_id).subscribe(
       (data: any) => {
         this.lookups.entries = data;
-
-        data.forEach((entry: any) => {
-          this.lookups.total_activity += entry.measure;
-        });
-        console.log(this.lookups.total_activity);
+        console.log(this.lookups);
         this.initCalHeatMap();
       },
       (error) => {
