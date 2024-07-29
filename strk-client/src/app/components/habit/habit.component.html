@@ -105,9 +105,20 @@
     </h1>
     <div
       *ngIf="this.lookups.entries"
-      class="color-[#2adac7] rounded-md p-[0.75rem] mt-[0.25rem] w-[40%] mx-auto outline-gray-500 outline outline-1 scroll"
+      class="color-[#2adac7] rounded-md p-[0.75rem] mt-[0.25rem] w-[40%] mx-auto outline-gray-500 outline outline-1 overflow-x-scroll"
     >
-      <div id="cal-heatmap" class="text-dark-gray overflow-x-scroll"></div>
+      <ngx-heatmap-calendar
+        [dates]="dates"
+        [startDate]="startDate"
+        [endDate]="endDate"
+        [classForValue]="callBackCssClass"
+        [showDayLabel]="true"
+        [showMonthLabel]="true"
+        [gap]="5"
+        [rectSize]="10"
+        (onClickCell)="onClickCell($event)"
+      />
+      <!-- <div id="cal-heatmap" class="text-dark-gray overflow-x-scroll"></div> -->
     </div>
   </div>
 </div>
