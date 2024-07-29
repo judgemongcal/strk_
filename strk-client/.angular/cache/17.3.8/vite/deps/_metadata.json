@@ -1,61 +1,61 @@
 {
-  "hash": "985a95c1",
+  "hash": "b71fd2c5",
   "configHash": "1d4cb90a",
-  "lockfileHash": "aebf7c3c",
-  "browserHash": "3cd2f120",
+  "lockfileHash": "57d48942",
+  "browserHash": "3546da9f",
   "optimized": {
     "@angular/common": {
       "src": "../../../../../node_modules/@angular/common/fesm2022/common.mjs",
       "file": "@angular_common.js",
-      "fileHash": "300df024",
+      "fileHash": "5d02bb16",
       "needsInterop": false
     },
     "@angular/common/http": {
       "src": "../../../../../node_modules/@angular/common/fesm2022/http.mjs",
       "file": "@angular_common_http.js",
-      "fileHash": "9837bc6c",
+      "fileHash": "d78df19a",
       "needsInterop": false
     },
     "@angular/core": {
       "src": "../../../../../node_modules/@angular/core/fesm2022/core.mjs",
       "file": "@angular_core.js",
-      "fileHash": "9b36439a",
+      "fileHash": "b11041c8",
       "needsInterop": false
     },
     "@angular/forms": {
       "src": "../../../../../node_modules/@angular/forms/fesm2022/forms.mjs",
       "file": "@angular_forms.js",
-      "fileHash": "88ea5803",
+      "fileHash": "a55d1470",
       "needsInterop": false
     },
     "@angular/platform-browser": {
       "src": "../../../../../node_modules/@angular/platform-browser/fesm2022/platform-browser.mjs",
       "file": "@angular_platform-browser.js",
-      "fileHash": "8fe10d7b",
+      "fileHash": "7f8bc8c5",
       "needsInterop": false
     },
     "@angular/platform-browser/animations/async": {
       "src": "../../../../../node_modules/@angular/platform-browser/fesm2022/animations/async.mjs",
       "file": "@angular_platform-browser_animations_async.js",
-      "fileHash": "ab6be9ee",
+      "fileHash": "fdb921ea",
       "needsInterop": false
     },
     "@angular/router": {
       "src": "../../../../../node_modules/@angular/router/fesm2022/router.mjs",
       "file": "@angular_router.js",
-      "fileHash": "73bd01dd",
+      "fileHash": "3a325d5b",
       "needsInterop": false
     },
     "cal-heatmap": {
       "src": "../../../../../node_modules/cal-heatmap/dist/cal-heatmap.esm.js",
       "file": "cal-heatmap.js",
-      "fileHash": "31156838",
+      "fileHash": "dd4e3883",
       "needsInterop": false
     },
     "jwt-decode": {
       "src": "../../../../../node_modules/jwt-decode/build/esm/index.js",
       "file": "jwt-decode.js",
-      "fileHash": "c86777ec",
+      "fileHash": "f6945ed5",
       "needsInterop": false
     }
   },

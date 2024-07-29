@@ -13,11 +13,16 @@ import { UnitsService } from '../../services/units.service';
 import { HabitEntriesService } from '../../services/habit-entries.service';
 import CalHeatmap from 'cal-heatmap';
 import 'cal-heatmap/cal-heatmap.css';
+import {
+  HeatMapDate,
+  HeatMapEvent,
+  NgxHeatmapCalendar,
+} from '../../../lib/ngx-heatmap-calendar/src/public-api';
 
 @Component({
   selector: 'app-habit',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, NgFor],
+  imports: [ReactiveFormsModule, CommonModule, NgFor, NgxHeatmapCalendar],
   templateUrl: './habit.component.html',
   styleUrl: './habit.component.css',
 })
@@ -47,6 +52,7 @@ export class HabitComponent implements OnInit {
     units: [],
     habit: [],
     entries: [],
+    total_activity: 0,
   };
 
   ngOnInit(): void {
@@ -54,6 +60,7 @@ export class HabitComponent implements OnInit {
     this.setHabitId();
     this.getHabit();
     this.getUnits();
+    // this.getUnit();
     this.getHabitEntries();
   }
 
@@ -87,8 +94,10 @@ export class HabitComponent implements OnInit {
     this.habitEntriesService.getEntries(this.user_id, this.habit_id).subscribe(
       (data: any) => {
         this.lookups.entries = data;
-        console.log(this.lookups);
-        this.initCalHeatMap();
+        data.forEach((entry: any) => {
+          this.lookups.total_activity += entry.measure;
+        });
+        // this.initCalHeatMap();
       },
       (error) => {
         console.error(error);
@@ -96,51 +105,80 @@ export class HabitComponent implements OnInit {
     );
   }
 
-  initCalHeatMap(): void {
-    const transformedData = JSON.parse(
-      JSON.stringify(this.transformEntryData(this.lookups.entries))
-    );
+  // initCalHeatMap(): void {
+  //   const transformedData = JSON.parse(
+  //     JSON.stringify(this.transformEntryData(this.lookups.entries))
+  //   );
 
-    const entryDates = this.lookups.entries.map(
-      (entry: any) => new Date(entry.entry_date)
-    );
-    const earliestEntryDate = new Date(Math.min(...entryDates));
-    console.log(earliestEntryDate);
-    console.log(transformedData);
-    console.log(entryDates);
-    this.calHeatMap.paint(
-      {
-        data: {
-          source: transformedData,
-          x: 'date',
-          y: 'value',
-          groupY: 'max',
-        },
-        date: { start: earliestEntryDate },
-        range: 12,
-        scale: {
-          color: {
-            type: 'threshold',
-            scheme: 'brbg',
-            domain: [10, 20, 30, 40, 50],
-          },
-        },
-        domain: {
-          type: 'month',
-          gutter: 4,
-          label: { text: 'MMM', textAlign: 'start', position: 'top' },
-        },
-        subDomain: {
-          type: 'ghDay',
-          radius: 2,
-          width: 11,
-          height: 11,
-          gutter: 4,
-        },
-        itemSelector: '#cal-heatmap',
-        theme: 'light',
-      },
-      []
+  //   const entryDates = this.lookups.entries.map(
+  //     (entry: any) => new Date(entry.entry_date)
+  //   );
+  //   const earliestEntryDate = new Date(Math.min(...entryDates));
+  //   console.log(earliestEntryDate);
+  //   console.log(transformedData);
+  //   console.log(entryDates);
+  //   this.calHeatMap.paint(
+  //     {
+  //       data: {
+  //         source: transformedData,
+  //         x: 'date',
+  //         y: 'value',
+  //         groupY: 'max',
+  //       },
+  //       date: { start: earliestEntryDate },
+  //       range: 12,
+  //       scale: {
+  //         color: {
+  //           type: 'threshold',
+  //           scheme: 'brbg',
+  //           domain: [10, 20, 30, 40, 50],
+  //         },
+  //       },
+  //       domain: {
+  //         type: 'month',
+  //         gutter: 4,
+  //         label: { text: 'MMM', textAlign: 'start', position: 'top' },
+  //       },
+  //       subDomain: {
+  //         type: 'ghDay',
+  //         radius: 2,
+  //         width: 11,
+  //         height: 11,
+  //         gutter: 4,
+  //       },
+  //       itemSelector: '#cal-heatmap',
+  //       theme: 'light',
+  //     },
+  //     []
+  //   );
+  // }
+
+  startDate = new Date(2024, 0, 1);
+  endDate = new Date(2024, 11, 31);
+
+  dates: HeatMapDate[] = [
+    { date: new Date(2024, 0, 1), value: 1 },
+    { date: new Date(2024, 0, 2), value: 2 },
+    { date: new Date(2024, 0, 4), value: 1 },
+    { date: new Date(2024, 0, 5), value: 1 },
+    { date: new Date(2024, 0, 8), value: 2 },
+  ];
+
+  callBackCssClass = ({ value }: HeatMapDate) => {
+    if (value === 1) {
+      return 'fill-value-1';
+    }
+
+    if (value === 2) {
+      return 'fill-value-2';
+    }
+
+    return 'fill-empty';
+  };
+
+  onClickCell(event: HeatMapEvent) {
+    alert(
+      `The value is: ${event.data.value} and the date is: ${event.data.date}`
     );
   }
 
@@ -178,6 +216,7 @@ export class HabitComponent implements OnInit {
     this.selectedUnit = this.lookups.units.find((unit: any) => {
       return unit.unit_id === this.currentUnitId;
     });
+    console.log(this.selectedUnit);
   }
 
   setHabitId() {
