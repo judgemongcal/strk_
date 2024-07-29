@@ -11,7 +11,7 @@ import {
 } from '@angular/forms';
 import { UnitsService } from '../../services/units.service';
 import { HabitEntriesService } from '../../services/habit-entries.service';
-import CalHeatMap from 'cal-heatmap';
+import CalHeatmap from 'cal-heatmap';
 import 'cal-heatmap/cal-heatmap.css';
 
 @Component({
@@ -30,7 +30,7 @@ export class HabitComponent implements OnInit {
   private unitsService = inject(UnitsService);
   private habit_id: any = null;
   private user_id: any = localStorage.getItem('user_id');
-  calHeatMap = new CalHeatMap();
+  calHeatMap = new CalHeatmap();
   entryRawData: any[] = [];
   selectedUnit: any;
   isEditing: boolean = false;
