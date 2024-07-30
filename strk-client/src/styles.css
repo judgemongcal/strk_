@@ -7,3 +7,15 @@
 body {
   font-family: "Space Mono", monospace;
 }
+
+.fill-value-light {
+  fill: #8dd1c7;
+}
+
+.fill-value-md {
+  fill: #065f55;
+}
+
+.fill-value-dark {
+  fill: #024b3f;
+}
