@@ -35,7 +35,6 @@ export class HabitComponent implements OnInit {
   private unitsService = inject(UnitsService);
   private habit_id: any = null;
   private user_id: any = localStorage.getItem('user_id');
-  calHeatMap = new CalHeatmap();
   entryRawData: any[] = [];
   selectedUnit: any;
   isEditing: boolean = false;
@@ -97,7 +96,6 @@ export class HabitComponent implements OnInit {
         data.forEach((entry: any) => {
           this.lookups.total_activity += entry.measure;
         });
-        // this.initCalHeatMap();
       },
       (error) => {
         console.error(error);
@@ -105,53 +103,7 @@ export class HabitComponent implements OnInit {
     );
   }
 
-  // initCalHeatMap(): void {
-  //   const transformedData = JSON.parse(
-  //     JSON.stringify(this.transformEntryData(this.lookups.entries))
-  //   );
-
-  //   const entryDates = this.lookups.entries.map(
-  //     (entry: any) => new Date(entry.entry_date)
-  //   );
-  //   const earliestEntryDate = new Date(Math.min(...entryDates));
-  //   console.log(earliestEntryDate);
-  //   console.log(transformedData);
-  //   console.log(entryDates);
-  //   this.calHeatMap.paint(
-  //     {
-  //       data: {
-  //         source: transformedData,
-  //         x: 'date',
-  //         y: 'value',
-  //         groupY: 'max',
-  //       },
-  //       date: { start: earliestEntryDate },
-  //       range: 12,
-  //       scale: {
-  //         color: {
-  //           type: 'threshold',
-  //           scheme: 'brbg',
-  //           domain: [10, 20, 30, 40, 50],
-  //         },
-  //       },
-  //       domain: {
-  //         type: 'month',
-  //         gutter: 4,
-  //         label: { text: 'MMM', textAlign: 'start', position: 'top' },
-  //       },
-  //       subDomain: {
-  //         type: 'ghDay',
-  //         radius: 2,
-  //         width: 11,
-  //         height: 11,
-  //         gutter: 4,
-  //       },
-  //       itemSelector: '#cal-heatmap',
-  //       theme: 'light',
-  //     },
-  //     []
-  //   );
-  // }
+  // @Todo: Refactor ngx-heatmap-calendar
 
   startDate = new Date(2024, 0, 1);
   endDate = new Date(2024, 11, 31);
