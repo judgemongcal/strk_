@@ -8,14 +8,30 @@ body {
   font-family: "Space Mono", monospace;
 }
 
-.fill-value-light {
-  fill: #8dd1c7;
+.fill-value-1 {
+  fill: #bdddc7;
 }
 
-.fill-value-md {
-  fill: #065f55;
+.fill-value-2 {
+  fill: #82cbc1;
 }
 
-.fill-value-dark {
-  fill: #024b3f;
+.fill-value-3 {
+  fill: #48a39a;
+}
+
+.fill-value-4 {
+  fill: #27877f;
+}
+
+.fill-value-5 {
+  fill: #0b655d;
+}
+
+.fill-value-6 {
+  fill: #004e44;
+}
+
+.fill-none {
+  fill: #eaedf0;
 }

@@ -124,28 +124,24 @@ export class HabitComponent implements OnInit {
   startDate = new Date(2024, 0, 1);
   endDate = new Date(2024, 11, 31);
 
-  // dates: HeatMapDate[] = [
-  //   { date: new Date(2024, 0, 1), value: 10 },
-  //   { date: new Date(2024, 0, 2), value: 5 },
-  //   { date: new Date(2024, 0, 4), value: 8 },
-  //   { date: new Date(2024, 0, 5), value: 2 },
-  //   { date: new Date(2024, 0, 8), value: 3 },
-  // ];
-
   callBackCssClass = ({ value }: HeatMapDate) => {
     if (value! > 0 && value! < 5) {
-      return 'fill-value-light';
+      return 'fill-value-1';
     }
-
     if (value! >= 5 && value! < 10) {
-      return 'fill-value-md';
+      return 'fill-value-2';
+    }
+    if (value! >= 10 && value! < 25) {
+      return 'fill-value-3';
+    }
+    if (value! >= 25 && value! < 50) {
+      return 'fill-value-4';
+    }
+    if (value! >= 50 && value! <= 100) {
+      return 'fill-value-5';
     }
 
-    if (value! >= 10) {
-      return 'fill-value-dark';
-    }
-
-    return 'fill-empty';
+    return 'fill-none';
   };
 
   onClickCell(event: HeatMapEvent) {
