@@ -96,6 +96,7 @@ export class HabitComponent implements OnInit {
         data.forEach((entry: any) => {
           this.lookups.total_activity += entry.measure;
         });
+        this.formatEntries();
       },
       (error) => {
         console.error(error);
@@ -103,18 +104,33 @@ export class HabitComponent implements OnInit {
     );
   }
 
+  formatEntries() {
+    this.lookups.entries = this.lookups.entries.map((entry: any) => {
+      const entry_date = new Date(entry.entry_date);
+      return {
+        date: new Date(
+          entry_date.getFullYear(),
+          entry_date.getMonth(),
+          entry_date.getDate()
+        ),
+        value: entry.measure,
+      };
+    });
+    console.log(this.lookups.entries);
+  }
+
   // @Todo: Refactor ngx-heatmap-calendar
 
   startDate = new Date(2024, 0, 1);
   endDate = new Date(2024, 11, 31);
 
-  dates: HeatMapDate[] = [
-    { date: new Date(2024, 0, 1), value: 10 },
-    { date: new Date(2024, 0, 2), value: 5 },
-    { date: new Date(2024, 0, 4), value: 8 },
-    { date: new Date(2024, 0, 5), value: 2 },
-    { date: new Date(2024, 0, 8), value: 3 },
-  ];
+  // dates: HeatMapDate[] = [
+  //   { date: new Date(2024, 0, 1), value: 10 },
+  //   { date: new Date(2024, 0, 2), value: 5 },
+  //   { date: new Date(2024, 0, 4), value: 8 },
+  //   { date: new Date(2024, 0, 5), value: 2 },
+  //   { date: new Date(2024, 0, 8), value: 3 },
+  // ];
 
   callBackCssClass = ({ value }: HeatMapDate) => {
     if (value! > 0 && value! < 5) {
