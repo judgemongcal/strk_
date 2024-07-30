@@ -51,6 +51,7 @@ export class HabitComponent implements OnInit {
     units: [],
     habit: [],
     entries: [],
+    formatted_entries: [],
     total_activity: 0,
   };
 
@@ -59,7 +60,7 @@ export class HabitComponent implements OnInit {
     this.setHabitId();
     this.getHabit();
     this.getUnits();
-    // this.getUnit();
+    this.getUnit();
     this.getHabitEntries();
   }
 
@@ -93,6 +94,7 @@ export class HabitComponent implements OnInit {
     this.habitEntriesService.getEntries(this.user_id, this.habit_id).subscribe(
       (data: any) => {
         this.lookups.entries = data;
+        this.lookups.total_activity = 0;
         data.forEach((entry: any) => {
           this.lookups.total_activity += entry.measure;
         });
@@ -105,18 +107,36 @@ export class HabitComponent implements OnInit {
   }
 
   formatEntries() {
-    this.lookups.entries = this.lookups.entries.map((entry: any) => {
+    this.lookups.entries.forEach((entry: any) => {
       const entry_date = new Date(entry.entry_date);
-      return {
-        date: new Date(
-          entry_date.getFullYear(),
-          entry_date.getMonth(),
-          entry_date.getDate()
-        ),
-        value: entry.measure,
-      };
+      console.log(
+        entry_date.getFullYear(),
+        entry_date.getMonth(),
+        entry_date.getDate()
+      );
+      const formattedEntry = new Date(
+        entry_date.getFullYear(),
+        entry_date.getMonth(),
+        entry_date.getDate()
+      );
+
+      const existingEntry = this.lookups.formatted_entries.find(
+        (e: any) => e.date.getTime() === formattedEntry.getTime()
+      );
+
+      if (existingEntry) {
+        // If the date exists, add the value to the existing entry's value
+        existingEntry.value += entry.measure;
+      } else {
+        // If the date doesn't exist, add the new entry to formattedEntries
+        this.lookups.formatted_entries.push({
+          date: formattedEntry,
+          value: entry.measure,
+        });
+      }
     });
-    console.log(this.lookups.entries);
+
+    console.log(this.lookups.formatted_entries);
   }
 
   // @Todo: Refactor ngx-heatmap-calendar
@@ -137,8 +157,12 @@ export class HabitComponent implements OnInit {
     if (value! >= 25 && value! < 50) {
       return 'fill-value-4';
     }
-    if (value! >= 50 && value! <= 100) {
+    if (value! >= 50 && value! < 100) {
       return 'fill-value-5';
+    }
+
+    if (value! >= 100) {
+      return 'fill-value-6';
     }
 
     return 'fill-none';
@@ -195,7 +219,7 @@ export class HabitComponent implements OnInit {
     this.getHabit();
     this.getUnits();
     this.getHabitEntries();
-    this.getUnit();
+    // this.getUnit();
   }
 
   handleUpdateHabit() {
