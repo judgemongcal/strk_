@@ -11,8 +11,6 @@ import {
 } from '@angular/forms';
 import { UnitsService } from '../../services/units.service';
 import { HabitEntriesService } from '../../services/habit-entries.service';
-import CalHeatmap from 'cal-heatmap';
-import 'cal-heatmap/cal-heatmap.css';
 import {
   HeatMapDate,
   HeatMapEvent,
