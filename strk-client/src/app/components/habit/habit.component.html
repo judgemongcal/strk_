@@ -96,12 +96,12 @@
     </ng-container>
     <h1
       class="text-[0.9rem] w-[40%] mx-auto mt-[2rem]"
-      *ngIf="lookups.total_activity != 0"
+      *ngIf="lookups.total_activity != null"
     >
       <span class="font-bold" *ngIf="selectedUnit.unit_name"
         >{{ lookups.total_activity }} {{ selectedUnit.unit_name }}</span
       >
-      recorded
+      this year
     </h1>
     <div
       *ngIf="this.lookups.entries"
@@ -119,6 +119,14 @@
         (onClickCell)="onClickCell($event)"
       />
       <!-- <div id="cal-heatmap" class="text-dark-gray overflow-x-scroll"></div> -->
+    </div>
+    <div class="grid-grid-cols-5 gap-2">
+      <h1
+        class="rounded-md py-1 px-2 mt-[0.25rem] text-[0.9rem] w-fit mx-auto outline-gray-500 outline outline-1 cursor-pointer"
+        (click)="setDate(2025)"
+      >
+        2024
+      </h1>
     </div>
   </div>
 </div>

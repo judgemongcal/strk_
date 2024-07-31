@@ -37,6 +37,8 @@ export class HabitComponent implements OnInit {
   selectedUnit: any;
   isEditing: boolean = false;
   currentUnitId: string = '';
+  startDate = new Date(2024, 0, 1);
+  endDate = new Date(2024, 11, 31);
 
   private fb = inject(FormBuilder);
   form: FormGroup = this.fb.group({
@@ -50,7 +52,7 @@ export class HabitComponent implements OnInit {
     habit: [],
     entries: [],
     formatted_entries: [],
-    total_activity: 0,
+    total_activity: null,
   };
 
   ngOnInit(): void {
@@ -93,15 +95,24 @@ export class HabitComponent implements OnInit {
       (data: any) => {
         this.lookups.entries = data;
         this.lookups.total_activity = 0;
-        data.forEach((entry: any) => {
-          this.lookups.total_activity += entry.measure;
-        });
+        this.getTotalActivities();
         this.formatEntries();
       },
       (error) => {
         console.error(error);
       }
     );
+  }
+
+  getTotalActivities() {
+    this.lookups.total_activity = 0;
+    this.lookups.entries.forEach((entry: any) => {
+      const formattedDate = new Date(entry.entry_date);
+      console.log(formattedDate.getFullYear(), this.startDate.getFullYear());
+      if (formattedDate.getFullYear() == this.startDate.getFullYear()) {
+        this.lookups.total_activity += entry.measure;
+      }
+    });
   }
 
   formatEntries() {
@@ -138,9 +149,6 @@ export class HabitComponent implements OnInit {
   }
 
   // @Todo: Refactor ngx-heatmap-calendar
-
-  startDate = new Date(2024, 0, 1);
-  endDate = new Date(2024, 11, 31);
 
   callBackCssClass = ({ value }: HeatMapDate) => {
     if (value! > 0 && value! < 5) {
@@ -232,6 +240,12 @@ export class HabitComponent implements OnInit {
         console.error(error);
       }
     );
+  }
+
+  setDate(year: number) {
+    this.startDate = new Date(year, 0, 1);
+    this.endDate = new Date(year, 11, 31);
+    this.getTotalActivities();
   }
 
   handleDeleteHabit() {
