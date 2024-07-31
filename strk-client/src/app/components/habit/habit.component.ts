@@ -122,7 +122,7 @@ export class HabitComponent implements OnInit {
       const formattedDate = new Date(entry.entry_date);
       const year = formattedDate.getFullYear();
       if (!this.lookups.all_years.includes(year)) {
-        this.lookups.all_years += year;
+        this.lookups.all_years.push(year);
       }
 
       console.log(this.lookups.all_years);
