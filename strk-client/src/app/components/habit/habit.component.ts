@@ -52,6 +52,7 @@ export class HabitComponent implements OnInit {
     habit: [],
     entries: [],
     formatted_entries: [],
+    all_years: [],
     total_activity: null,
   };
 
@@ -97,6 +98,7 @@ export class HabitComponent implements OnInit {
         this.lookups.total_activity = 0;
         this.getTotalActivities();
         this.formatEntries();
+        this.getAllExistingYears();
       },
       (error) => {
         console.error(error);
@@ -112,6 +114,18 @@ export class HabitComponent implements OnInit {
       if (formattedDate.getFullYear() == this.startDate.getFullYear()) {
         this.lookups.total_activity += entry.measure;
       }
+    });
+  }
+
+  getAllExistingYears() {
+    this.lookups.entries.forEach((entry: any) => {
+      const formattedDate = new Date(entry.entry_date);
+      const year = formattedDate.getFullYear();
+      if (!this.lookups.all_years.includes(year)) {
+        this.lookups.all_years += year;
+      }
+
+      console.log(this.lookups.all_years);
     });
   }
 
