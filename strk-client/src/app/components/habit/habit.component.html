@@ -147,10 +147,10 @@
           *ngFor="let entry of lookups.paginated_entries"
           class="rounded-md py-2 px-5 mt-[0.25rem] text-[0.9rem] items-center flex flex-row justify-between w-full outline-gray-500 outline outline-1 cursor-pointer"
         >
-          <p class="font-bold">{{ formatDate(entry.entry_date) }}</p>
+          <p class="font-bold">{{ formatDate(entry.date) }}</p>
           <p class="font-normal">
             {{ selectedUnit.unit_name.toUpperCase() }}:
-            <span class="font-bold"> {{ entry.measure }}</span>
+            <span class="font-bold"> {{ entry.value }}</span>
           </p>
         </div>
       </div>
@@ -168,9 +168,6 @@
           >
             Previous
           </button>
-
-          <!-- [ngClass]="{ 'w-full p-3 text-white bg-dark-gray rounded-md
-          duration-300': 'hover:bg-primary', 'opacity-50': !form.valid }" -->
 
           <button
             [ngClass]="{

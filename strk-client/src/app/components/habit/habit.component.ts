@@ -56,9 +56,9 @@ export class HabitComponent implements OnInit {
     paginated_entries: [],
     all_years: [],
     total_activity: null,
-    total_pages: 1,
+    total_pages: 0,
     current_page: 1,
-    items_per_page: 10,
+    items_per_page: 5,
   };
 
   ngOnInit(): void {
@@ -96,18 +96,25 @@ export class HabitComponent implements OnInit {
     });
   }
 
-  getHabitEntries() {
+  getHabitEntries(year: number = this.currentYear) {
+    this.lookups.entries = [];
     this.habitEntriesService.getEntries(this.user_id, this.habit_id).subscribe(
       (data: any) => {
         data.sort(
           (a: any, b: any) =>
             new Date(a.entry_date).getTime() - new Date(b.entry_date).getTime()
         );
-        this.lookups.entries = data;
+
+        this.getAllExistingYears(data);
+
+        this.lookups.entries = data.filter(
+          (entry: any) => new Date(entry.entry_date).getFullYear() === year
+        );
+
         this.lookups.total_activity = 0;
         this.getTotalActivities();
         this.formatEntries();
-        this.getAllExistingYears();
+
         this.getPaginatedEntries();
         this.getTotalPages();
       },
@@ -127,8 +134,8 @@ export class HabitComponent implements OnInit {
     });
   }
 
-  getAllExistingYears() {
-    this.lookups.entries.forEach((entry: any) => {
+  getAllExistingYears(data: any) {
+    data.forEach((entry: any) => {
       const formattedDate = new Date(entry.entry_date);
       const year = formattedDate.getFullYear();
       if (!this.lookups.all_years.includes(year)) {
@@ -138,6 +145,7 @@ export class HabitComponent implements OnInit {
   }
 
   formatEntries() {
+    this.lookups.formatted_entries = [];
     this.lookups.entries.forEach((entry: any) => {
       const entry_date = new Date(entry.entry_date);
       const formattedEntry = new Date(
@@ -161,6 +169,8 @@ export class HabitComponent implements OnInit {
         });
       }
     });
+
+    console.log(this.lookups.formatted_entries);
   }
 
   // @Todo: Refactor ngx-heatmap-calendar
@@ -240,15 +250,19 @@ export class HabitComponent implements OnInit {
 
   getTotalPages() {
     console.log(this.lookups.entries.length, this.lookups.items_per_page);
+    console.log(
+      'Total pages: ' +
+        Math.ceil(this.lookups.entries.length / this.lookups.items_per_page)
+    );
     this.lookups.total_pages = Math.ceil(
-      this.lookups.entries.length / this.lookups.items_per_page
+      this.lookups.formatted_entries.length / this.lookups.items_per_page
     );
   }
 
   getPaginatedEntries() {
     const startIndex =
       (this.lookups.current_page - 1) * this.lookups.items_per_page;
-    this.lookups.paginated_entries = this.lookups.entries.slice(
+    this.lookups.paginated_entries = this.lookups.formatted_entries.slice(
       startIndex,
       startIndex + this.lookups.items_per_page
     );
@@ -317,7 +331,12 @@ export class HabitComponent implements OnInit {
   setDate(year: number) {
     this.startDate = new Date(year, 0, 1);
     this.endDate = new Date(year, 11, 31);
-    this.getTotalActivities();
+    this.getHabitEntries(year);
+    this.resetPage();
+  }
+
+  resetPage() {
+    this.lookups.current_page = 1;
   }
 
   handleDeleteHabit() {
