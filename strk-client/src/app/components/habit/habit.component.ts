@@ -110,7 +110,6 @@ export class HabitComponent implements OnInit {
     this.lookups.total_activity = 0;
     this.lookups.entries.forEach((entry: any) => {
       const formattedDate = new Date(entry.entry_date);
-      console.log(formattedDate.getFullYear(), this.startDate.getFullYear());
       if (formattedDate.getFullYear() == this.startDate.getFullYear()) {
         this.lookups.total_activity += entry.measure;
       }
@@ -124,19 +123,12 @@ export class HabitComponent implements OnInit {
       if (!this.lookups.all_years.includes(year)) {
         this.lookups.all_years.push(year);
       }
-
-      console.log(this.lookups.all_years);
     });
   }
 
   formatEntries() {
     this.lookups.entries.forEach((entry: any) => {
       const entry_date = new Date(entry.entry_date);
-      console.log(
-        entry_date.getFullYear(),
-        entry_date.getMonth(),
-        entry_date.getDate()
-      );
       const formattedEntry = new Date(
         entry_date.getFullYear(),
         entry_date.getMonth(),
@@ -158,8 +150,6 @@ export class HabitComponent implements OnInit {
         });
       }
     });
-
-    console.log(this.lookups.formatted_entries);
   }
 
   // @Todo: Refactor ngx-heatmap-calendar
@@ -228,7 +218,6 @@ export class HabitComponent implements OnInit {
     this.selectedUnit = this.lookups.units.find((unit: any) => {
       return unit.unit_id === this.currentUnitId;
     });
-    console.log(this.selectedUnit);
   }
 
   setHabitId() {
@@ -245,7 +234,6 @@ export class HabitComponent implements OnInit {
   handleUpdateHabit() {
     this.habitsService.updateHabit(this.habit_id, this.form.value).subscribe(
       (data: any) => {
-        console.log(data);
         this.toggleEdit();
         this.setUnitId(this.currentUnitId);
         this.refreshHabitData();
@@ -265,7 +253,6 @@ export class HabitComponent implements OnInit {
   handleDeleteHabit() {
     this.habitsService.deleteHabit(this.habit_id).subscribe(
       (data: any) => {
-        console.log(data);
         this.handleBack();
       },
       (error) => {
