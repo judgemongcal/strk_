@@ -94,6 +94,10 @@ export class HabitComponent implements OnInit {
   getHabitEntries() {
     this.habitEntriesService.getEntries(this.user_id, this.habit_id).subscribe(
       (data: any) => {
+        data.sort(
+          (a: any, b: any) =>
+            new Date(a.entry_date).getTime() - new Date(b.entry_date).getTime()
+        );
         this.lookups.entries = data;
         this.lookups.total_activity = 0;
         this.getTotalActivities();

@@ -124,19 +124,23 @@
         <div
           *ngFor="let year of lookups.all_years"
           class="rounded-md py-1 px-2 mt-[0.25rem] text-[0.9rem] w-fit outline-gray-500 outline outline-1 cursor-pointer"
-          (click)="setDate(2025)"
+          (click)="setDate(year)"
         >
           {{ year }}
         </div>
       </div>
 
       <h1 class="font-bold">Activity Logs</h1>
-      <div class="years-container flex flex-col gap-2">
+      <div class="years-container flex flex-col gap-4">
         <div
           *ngFor="let entry of lookups.entries"
-          class="rounded-md py-1 px-2 mt-[0.25rem] text-[0.9rem] w-fit outline-gray-500 outline outline-1 cursor-pointer"
+          class="rounded-md py-2 px-5 mt-[0.25rem] text-[0.9rem] flex flex-row justify-between w-full outline-gray-500 outline outline-1 cursor-pointer"
         >
-          {{ formatDate(entry.entry_date) }}
+          <p class="font-bold">{{ formatDate(entry.entry_date) }}</p>
+          <p class="font-bold">
+            {{ entry.measure }}
+            <span class="font-normal">{{ selectedUnit.unit_name }}</span>
+          </p>
         </div>
       </div>
     </div>
