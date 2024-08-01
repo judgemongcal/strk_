@@ -119,13 +119,25 @@
         (onClickCell)="onClickCell($event)"
       />
     </div>
-    <div class="grid grid-cols-5 gap-2 w-[40%] mx-auto">
-      <div
-        *ngFor="let year of lookups.all_years"
-        class="rounded-md py-1 px-2 mt-[0.25rem] text-[0.9rem] w-fit outline-gray-500 outline outline-1 cursor-pointer"
-        (click)="setDate(2025)"
-      >
-        {{ year }}
+    <div class="mx-auto w-[40%] flex flex-col gap-[1rem]">
+      <div class="years-container grid grid-cols-5 gap-2">
+        <div
+          *ngFor="let year of lookups.all_years"
+          class="rounded-md py-1 px-2 mt-[0.25rem] text-[0.9rem] w-fit outline-gray-500 outline outline-1 cursor-pointer"
+          (click)="setDate(2025)"
+        >
+          {{ year }}
+        </div>
+      </div>
+
+      <h1 class="font-bold">Activity Logs</h1>
+      <div class="years-container flex flex-col gap-2">
+        <div
+          *ngFor="let entry of lookups.entries"
+          class="rounded-md py-1 px-2 mt-[0.25rem] text-[0.9rem] w-fit outline-gray-500 outline outline-1 cursor-pointer"
+        >
+          {{ formatDate(entry.entry_date) }}
+        </div>
       </div>
     </div>
   </div>

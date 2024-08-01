@@ -203,6 +203,18 @@ export class HabitComponent implements OnInit {
     return transformedData;
   }
 
+  formatDate(date: Date): string {
+    const rawDate = new Date(date);
+    const dateOptions: Intl.DateTimeFormatOptions = {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    };
+    const formattedDate = rawDate.toLocaleDateString('en-US', dateOptions);
+
+    return formattedDate;
+  }
+
   toggleEdit() {
     this.isEditing = !this.isEditing;
   }
