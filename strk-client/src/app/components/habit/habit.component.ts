@@ -107,6 +107,8 @@ export class HabitComponent implements OnInit {
         this.getTotalActivities();
         this.formatEntries();
         this.getAllExistingYears();
+        this.getPaginatedEntries();
+        this.getTotalPages();
       },
       (error) => {
         console.error(error);
@@ -228,6 +230,7 @@ export class HabitComponent implements OnInit {
   }
 
   getTotalPages() {
+    console.log(this.lookups.entries.length, this.lookups.items_per_page);
     this.lookups.total_pages = Math.ceil(
       this.lookups.entries.length / this.lookups.items_per_page
     );
@@ -242,10 +245,27 @@ export class HabitComponent implements OnInit {
     );
   }
 
-  changePage(page: number) {
-    if (page >= 1 && page <= this.lookups.total_pages) {
-      this.lookups.current_page = page;
+  changePage(action: string) {
+    const page = this.lookups.current_page;
+    console.log(action, page);
+
+    if (action === 'back') {
+      page === 1
+        ? (this.lookups.current_page = 1)
+        : (this.lookups.current_page -= 1);
     }
+    if (action === 'next') {
+      page === this.lookups.total_pages
+        ? (this.lookups.current_page = this.lookups.total_pages)
+        : (this.lookups.current_page += 1);
+    }
+
+    console.log(
+      'Current page: ' + this.lookups.current_page,
+      'Total Pages: ' + this.lookups.total_pages
+    );
+
+    this.getPaginatedEntries();
   }
 
   setUnitId(unitId: string) {
