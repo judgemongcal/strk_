@@ -28,7 +28,7 @@ export class HabitAddComponent implements OnInit {
   private fb = inject(FormBuilder);
   form: FormGroup = this.fb.group({
     user_id: new FormControl('', [Validators.required]),
-    habit_id: new FormControl('', [Validators.required]),
+    habit_name: new FormControl('', [Validators.required]),
     unit_id: new FormControl('', [Validators.required]),
   });
 
