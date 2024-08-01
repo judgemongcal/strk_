@@ -34,7 +34,7 @@ export class HabitComponent implements OnInit {
   private habit_id: any = null;
   private user_id: any = localStorage.getItem('user_id');
   entryRawData: any[] = [];
-  selectedUnit: any;
+  selectedUnit: any = { unit_id: null, unit_name: '' };
   isEditing: boolean = false;
   currentUnitId: string = '';
   currentYear = new Date().getFullYear();
@@ -65,9 +65,8 @@ export class HabitComponent implements OnInit {
     this.getHabitId();
     this.setHabitId();
     this.getHabit();
-    this.getUnits();
-    this.getUnit();
     this.getHabitEntries();
+    this.getUnits();
   }
 
   getHabitId() {
@@ -79,8 +78,8 @@ export class HabitComponent implements OnInit {
   getHabit() {
     this.habitsService.getHabit(Number(this.habit_id)).subscribe(
       (data: any) => {
-        this.lookups.habit = data;
         this.setUnitId(data[0].unit_id);
+        this.lookups.habit = data;
         this.form.get('habit_name')?.setValue(data[0].habit_name);
       },
       (error) => {
@@ -90,9 +89,21 @@ export class HabitComponent implements OnInit {
   }
 
   getUnits() {
-    this.unitsService.getUnits().subscribe((data) => {
-      this.lookups.units = data;
-      this.getUnit();
+    this.unitsService.getUnits().subscribe(
+      (data: any) => {
+        this.lookups.units = data;
+
+        this.getUnit();
+      },
+      (error: any) => {
+        console.error(error);
+      }
+    );
+  }
+
+  getUnit() {
+    this.selectedUnit = this.lookups.units.find((unit: any) => {
+      return unit.unit_id === this.currentUnitId;
     });
   }
 
@@ -296,12 +307,9 @@ export class HabitComponent implements OnInit {
       ? (this.currentUnitId = '')
       : (this.currentUnitId = unitId);
     this.form.get('unit_id')?.setValue(this.currentUnitId);
-  }
-
-  getUnit() {
-    this.selectedUnit = this.lookups.units.find((unit: any) => {
-      return unit.unit_id === this.currentUnitId;
-    });
+    if (this.lookups.units.length > 0) {
+      this.getUnit();
+    }
   }
 
   setHabitId() {
