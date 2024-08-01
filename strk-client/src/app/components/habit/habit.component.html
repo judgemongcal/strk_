@@ -136,7 +136,7 @@
 
       <div class="flex flex-row justify-between items-center mt-[2rem]">
         <h1 class="font-bold">Activity Logs</h1>
-        <h1 class="font-normal">
+        <h1 *ngIf="lookups.paginated_entries.length > 0" class="font-normal">
           Page <span class="font-bold">{{ lookups.current_page }}</span> of
           {{ lookups.total_pages }}
         </h1>
