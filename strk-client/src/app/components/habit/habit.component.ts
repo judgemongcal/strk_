@@ -37,6 +37,7 @@ export class HabitComponent implements OnInit {
   selectedUnit: any;
   isEditing: boolean = false;
   currentUnitId: string = '';
+  currentYear = new Date().getFullYear();
   startDate = new Date(2024, 0, 1);
   endDate = new Date(2024, 11, 31);
 
@@ -227,6 +228,14 @@ export class HabitComponent implements OnInit {
 
   toggleEdit() {
     this.isEditing = !this.isEditing;
+  }
+
+  toggleMeasureDesc(year: Number): string {
+    if (year === this.currentYear) {
+      return 'this year.';
+    } else {
+      return `in ${year}.`;
+    }
   }
 
   getTotalPages() {
