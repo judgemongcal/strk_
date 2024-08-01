@@ -130,16 +130,16 @@
         </div>
       </div>
 
-      <h1 class="font-bold">Activity Logs</h1>
+      <h1 class="font-bold mt-[2rem]">Activity Logs</h1>
       <div class="years-container flex flex-col gap-4">
         <div
           *ngFor="let entry of lookups.entries"
-          class="rounded-md py-2 px-5 mt-[0.25rem] text-[0.9rem] flex flex-row justify-between w-full outline-gray-500 outline outline-1 cursor-pointer"
+          class="rounded-md py-2 px-5 mt-[0.25rem] text-[0.9rem] items-center flex flex-row justify-between w-full outline-gray-500 outline outline-1 cursor-pointer"
         >
           <p class="font-bold">{{ formatDate(entry.entry_date) }}</p>
-          <p class="font-bold">
-            {{ entry.measure }}
-            <span class="font-normal">{{ selectedUnit.unit_name }}</span>
+          <p class="font-normal">
+            {{ selectedUnit.unit_name.toUpperCase() }}:
+            <span class="font-bold"> {{ entry.measure }}</span>
           </p>
         </div>
       </div>

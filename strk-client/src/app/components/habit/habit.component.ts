@@ -52,8 +52,12 @@ export class HabitComponent implements OnInit {
     habit: [],
     entries: [],
     formatted_entries: [],
+    paginated_entries: [],
     all_years: [],
     total_activity: null,
+    total_pages: 1,
+    current_page: 1,
+    items_per_page: 5,
   };
 
   ngOnInit(): void {
@@ -221,6 +225,27 @@ export class HabitComponent implements OnInit {
 
   toggleEdit() {
     this.isEditing = !this.isEditing;
+  }
+
+  getTotalPages() {
+    this.lookups.total_pages = Math.ceil(
+      this.lookups.entries.length / this.lookups.items_per_page
+    );
+  }
+
+  getPaginatedEntries() {
+    const startIndex =
+      (this.lookups.current_page - 1) * this.lookups.items_per_page;
+    this.lookups.paginated_entries = this.lookups.entries.slice(
+      startIndex,
+      startIndex + this.lookups.items_per_page
+    );
+  }
+
+  changePage(page: number) {
+    if (page >= 1 && page <= this.lookups.total_pages) {
+      this.lookups.current_page = page;
+    }
   }
 
   setUnitId(unitId: string) {
