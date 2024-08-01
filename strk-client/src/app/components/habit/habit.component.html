@@ -1,7 +1,7 @@
 <div
-  class="main-container flex flex-col justify-center items-center mt-[30%] mb-[30%] w-80 mx-auto"
+  class="main-container flex flex-col justify-center items-center mt-[30%] mb-[30%] mx-auto"
 >
-  <div class="flex flex-row justify-between w-full mb-[3rem]">
+  <div class="flex flex-row justify-between w-[80%] mb-[3rem]">
     <div
       class="bg-white p-3 rounded-md outline outline-gray-500 outline-2 cursor-pointer w-fit hover:bg-dark-gray hover:text-white duration-300"
       (click)="handleBack()"
@@ -132,23 +132,13 @@
 
       <div class="flex flex-row justify-between items-center mt-[2rem]">
         <h1 class="font-bold">Activity Logs</h1>
-        <div class="pagination-btns flex flex-row gap-4 items-center">
-          <h1
-            class="w-fit p-2 outline outline-1 outline-gray-500 rounded-md cursor-pointer"
-            (click)="changePage('back')"
-          >
-            Previous
-          </h1>
-          <h1
-            class="w-fit p-2 outline outline-1 outline-gray-500 rounded-md cursor-pointer"
-            (click)="changePage('next')"
-          >
-            Next
-          </h1>
-        </div>
+        <h1 class="font-normal">
+          Page <span class="font-bold">{{ lookups.current_page }}</span> of
+          {{ lookups.total_pages }}
+        </h1>
       </div>
 
-      <div class="years-container flex flex-col gap-4">
+      <div class="entries-container flex flex-col gap-4">
         <div
           *ngFor="let entry of lookups.paginated_entries"
           class="rounded-md py-2 px-5 mt-[0.25rem] text-[0.9rem] items-center flex flex-row justify-between w-full outline-gray-500 outline outline-1 cursor-pointer"
@@ -158,6 +148,37 @@
             {{ selectedUnit.unit_name.toUpperCase() }}:
             <span class="font-bold"> {{ entry.measure }}</span>
           </p>
+        </div>
+      </div>
+
+      <div class="flex flex-row justify-start items-center">
+        <div class="pagination-btns flex flex-row gap-4 items-center">
+          <button
+            [ngClass]="{
+              'w-fit p-2 outline outline-1 outline-gray-500 rounded-md cursor-pointer': true,
+              'opacity-50': lookups.current_page == 1
+            }"
+            (click)="changePage('back')"
+            type="button"
+            [disabled]="lookups.current_page == 1"
+          >
+            Previous
+          </button>
+
+          <!-- [ngClass]="{ 'w-full p-3 text-white bg-dark-gray rounded-md
+          duration-300': 'hover:bg-primary', 'opacity-50': !form.valid }" -->
+
+          <button
+            [ngClass]="{
+              'w-fit p-2 outline outline-1 outline-gray-500 rounded-md cursor-pointer': true,
+              'opacity-50': lookups.current_page >= lookups.total_pages
+            }"
+            (click)="changePage('next')"
+            type="button"
+            [disabled]="lookups.current_page > lookups.total_pages"
+          >
+            Next
+          </button>
         </div>
       </div>
     </div>

@@ -57,7 +57,7 @@ export class HabitComponent implements OnInit {
     total_activity: null,
     total_pages: 1,
     current_page: 1,
-    items_per_page: 5,
+    items_per_page: 10,
   };
 
   ngOnInit(): void {
