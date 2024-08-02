@@ -1,20 +1,20 @@
 <div
-  class="main-container flex flex-col justify-center items-center mt-[30%] w-80 mx-auto"
+  class="main-container flex flex-col justify-center items-center w-full mx-auto"
 >
   <div class="flex flex-row justify-between w-full mb-[3rem]">
     <div
-      class="bg-white p-3 rounded-md outline outline-gray-500 outline-2 cursor-pointer w-fit hover:bg-dark-gray hover:text-white duration-300"
+      class="bg-white p-3 rounded-md outline outline-gray-500 outline-2 cursor-pointer w-fit hover:bg-dark-gray hover:text-white duration-300 2xl:text-[1.25rem]"
       (click)="redirectToHome()"
     >
-      Home 🏠
+      Back 👈🏼
     </div>
   </div>
-  <h1 class="font-bold text-[1.5rem] self-center">
+  <h1 class="font-bold text-[1.5rem] self-center 2xl:text-[2.5rem]">
     {{ lookups.user_info.first_name }}'s Habits
   </h1>
 
   <div
-    class="bg-white p-3 rounded-md outline self-start mt-[2rem] outline-gray-500 outline-2 cursor-pointer w-fit hover:bg-primary hover:outline-primary hover:text-white duration-300"
+    class="bg-white p-3 rounded-md outline self-start mt-[2rem] outline-gray-500 outline-2 cursor-pointer w-fit hover:bg-primary hover:outline-primary hover:text-white duration-300 2xl:text-[1.5rem]"
     (click)="redirectToAdd()"
   >
     Add ➕
@@ -25,7 +25,7 @@
   >
     <h1
       *ngFor="let habit of lookups.habits"
-      class="bg-white p-3 font-semibold rounded-md outline outline-gray-500 outline-2 cursor-pointer hover:scale-105 text-center hover:bg-secondary duration-300"
+      class="bg-white p-3 font-semibold rounded-md outline outline-gray-500 outline-2 cursor-pointer hover:scale-105 text-center hover:bg-secondary duration-300 2xl:text-[1.5rem]"
       (click)="handleRedirect(habit.habit_id)"
     >
       {{ habit.habit_name }}

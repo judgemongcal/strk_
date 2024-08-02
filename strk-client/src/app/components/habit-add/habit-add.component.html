@@ -1,35 +1,39 @@
 <div
-  class="main-container flex flex-col justify-center items-center mt-[30%] w-80 mx-auto"
+  class="main-container flex flex-col justify-center items-center w-full mx-auto"
 >
   <div class="flex flex-row justify-between w-full mb-[3rem]">
     <div
-      class="bg-white p-3 rounded-md outline outline-gray-500 outline-2 cursor-pointer w-fit hover:bg-dark-gray hover:text-white duration-300"
+      class="bg-white p-3 rounded-md outline outline-gray-500 outline-2 cursor-pointer w-fit hover:bg-dark-gray hover:text-white duration-300 2xl:text-[1.25rem]"
       (click)="handleBack()"
     >
       Back 👈🏼
     </div>
   </div>
-  <h1 class="font-bold text-[1.5rem] self-center">Add New Habit</h1>
+  <h1 class="font-bold text-[1.5rem] self-center 2xl:text-[2.5rem]">
+    Add New Habit
+  </h1>
 
   <div
     class="form-container grid grid-cols-1 gap-[1rem] w-full mt-[2rem] mb-[2rem]"
   >
     <form [formGroup]="form" (ngSubmit)="handleAdd()">
-      <label for="habit_name" class="w-full">Habit Name </label>
+      <label for="habit_name" class="w-full 2xl:text-[1.25rem]"
+        >Habit Name
+      </label>
       <input
         type="text"
         name="habit_name"
         formControlName="habit_name"
-        class="outline outline-gray-200 outline-1 rounded-md py-2 px-4 w-full mt-[1rem] mb-[1.5rem]"
+        class="outline outline-gray-200 outline-1 rounded-md py-2 2xl:py-4 px-4 w-full mt-[1rem] mb-[1.5rem] 2xl:text-[1.25rem]"
         placeholder="Enter new habit's name here"
       />
-      <label class="w-full">Unit Measurement</label>
+      <label class="w-full 2xl:text-[1.25rem]">Unit Measurement</label>
       <div class="grid grid-cols-2 gap-[0.5rem] mt-[1rem] mb-[3rem]">
         <p
           *ngFor="let unit of lookups.units"
           [ngClass]="{
-            'outline-gray-200 cursor-pointer outline-1 rounded-md p-2 w-full text-center hover:bg-secondary duration-300 hover:text-white hover:outline-secondary': true,
-            'bg-secondary': currentUnitId === unit.unit_id
+            'cursor-pointer outline outline-1 outline-gray-200 rounded-md p-2  2xl:text-[1.25rem] w-full text-center hover:bg-secondary duration-300 hover:text-white hover:outline-secondary': true,
+            'bg-secondary ': currentUnitId === unit.unit_id
           }"
           (click)="setUnitId(unit.unit_id)"
         >
@@ -38,7 +42,7 @@
       </div>
       <button
         [ngClass]="{
-          'w-full p-3 text-white bg-dark-gray rounded-md duration-300':
+          'w-full p-3 text-white bg-dark-gray 2xl:text-[1.5rem] rounded-md duration-300':
             'hover:bg-primary',
           'opacity-50': !form.valid
         }"
