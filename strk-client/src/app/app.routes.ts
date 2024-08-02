@@ -6,12 +6,12 @@ import { HabitsComponent } from './components/habits/habits.component';
 import { HabitAddComponent } from './components/habit-add/habit-add.component';
 import { HabitComponent } from './components/habit/habit.component';
 import { EntryAddComponent } from './components/entry-add/entry-add.component';
-import { AuthLayoutComponent } from './components/common/layouts/auth-layout/auth-layout.component';
+import { AppLayoutComponent } from './components/common/layouts/app-layout/app-layout.component';
 
 export const routes: Routes = [
   {
     path: '',
-    component: AuthLayoutComponent,
+    component: AppLayoutComponent,
     children: [
       {
         path: '',
