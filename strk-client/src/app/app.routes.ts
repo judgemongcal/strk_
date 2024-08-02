@@ -6,12 +6,20 @@ import { HabitsComponent } from './components/habits/habits.component';
 import { HabitAddComponent } from './components/habit-add/habit-add.component';
 import { HabitComponent } from './components/habit/habit.component';
 import { EntryAddComponent } from './components/entry-add/entry-add.component';
+import { AuthLayoutComponent } from './components/common/layouts/auth-layout/auth-layout.component';
 
 export const routes: Routes = [
   {
     path: '',
-    component: LoginComponent,
+    component: AuthLayoutComponent,
+    children: [
+      {
+        path: '',
+        component: LoginComponent,
+      },
+    ],
   },
+
   { path: 'home', component: HomeComponent, canActivate: [authGuard] },
   { path: 'habits', component: HabitsComponent, canActivate: [authGuard] },
   {
