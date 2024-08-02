@@ -77,7 +77,7 @@
         <div class="flex flex-col gap-[1rem] justify-center">
           <button
             [ngClass]="{
-              'w-full p-3 text-white bg-dark-gray rounded-md duration-300':
+              'w-full p-3 2xl:text-[1.25rem] text-white bg-dark-gray rounded-md duration-300':
                 'hover:bg-primary',
               'opacity-50': !form.valid
             }"
@@ -88,7 +88,7 @@
           </button>
           <button
             type="button"
-            class="w-full p-3 text-white bg-red-600 rounded-md duration-300 hover:bg-red-700"
+            class="w-full p-3 2xl:text-[1.25rem] text-white bg-red-600 rounded-md duration-300 hover:bg-red-700"
             (click)="handleDeleteHabit()"
           >
             Delete Habit
