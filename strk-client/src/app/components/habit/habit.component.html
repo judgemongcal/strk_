@@ -1,9 +1,9 @@
 <div
-  class="main-container flex flex-col justify-center items-center mb-[30%] mx-auto"
+  class="main-container flex flex-col justify-center items-center w-full mx-auto"
 >
-  <div class="flex flex-row justify-between w-[80%] mb-[3rem]">
+  <div class="flex flex-row justify-between w-full mb-[3rem]">
     <div
-      class="bg-white p-3 rounded-md outline outline-gray-500 outline-2 cursor-pointer w-fit hover:bg-dark-gray hover:text-white duration-300"
+      class="bg-white p-3 rounded-md outline outline-gray-500 outline-2 cursor-pointer w-fit hover:bg-dark-gray hover:text-white duration-300 2xl:text-[1.25rem]"
       (click)="handleBack()"
     >
       Back 👈🏼
@@ -11,16 +11,16 @@
   </div>
   <div
     *ngIf="lookups.habit.length > 0"
-    class="flex flex-col gap-2 justify-center"
+    class="flex flex-col gap-2 justify-center w-full"
   >
     <div
       class="habit-name flex flex-col justify-center gap-[1.5rem] items-center"
     >
-      <h1 class="font-bold text-[1.5rem] self-center">
+      <h1 class="font-bold text-[1.5rem] self-center 2xl:text-[2.5rem]">
         {{ lookups.habit[0].habit_name }}
       </h1>
 
-      <h1 *ngIf="selectedUnit" class="self-center">
+      <h1 *ngIf="selectedUnit" class="self-center 2xl:text-[1.25rem]">
         Measured in
         <span class="bg-secondary rounded-md py-1 px-3 w-fit text-center">
           {{ selectedUnit.unit_name }}
@@ -28,14 +28,14 @@
       </h1>
       <div class="flex flex-row gap-2 justify-center">
         <h1
-          class="py-2 px-3 rounded-md outline outline-gray-200 outline-2 cursor-pointer w-fit text-[0.75rem] hover:bg-primary hover:outline-primary hover:text-white duration-300"
+          class="py-2 px-3 rounded-md outline outline-gray-200 outline-2 cursor-pointer w-fit text-[0.75rem] 2xl:text-[1rem] hover:bg-primary hover:outline-primary hover:text-white duration-300"
           (click)="handleRedirectAdd()"
         >
           Add Entry
         </h1>
         <h1
           [ngClass]="{
-            ' py-2 px-3 rounded-md outline outline-gray-200 outline-2 cursor-pointer w-fit text-[0.75rem] hover:bg-dark-gray hover:text-white duration-300': true,
+            ' py-2 px-3  rounded-md outline outline-gray-200 outline-2 cursor-pointer w-fit text-[0.75rem] 2xl:text-[1rem] hover:bg-dark-gray hover:text-white duration-300': true,
             'bg-dark-gray text-white': isEditing === true
           }"
           (click)="toggleEdit()"
@@ -48,22 +48,24 @@
       <form
         [formGroup]="form"
         (ngSubmit)="handleUpdateHabit()"
-        class="w-[40%] mx-auto"
+        class="w-full mx-auto"
       >
-        <label for="habit_name" class="w-full">Habit Name </label>
+        <label for="habit_name" class="w-full 2xl:text-[1.25rem]"
+          >Habit Name
+        </label>
         <input
           type="text"
           name="habit_name"
           formControlName="habit_name"
-          class="outline outline-gray-200 outline-1 rounded-md py-2 px-4 w-full mt-[1rem] mb-[1.5rem]"
+          class="outline outline-gray-200 outline-1 rounded-md py-2 px-4 w-full mt-[1rem] mb-[1.5rem] 2xl:py-4 2xl:text-[1.25rem]"
           placeholder="Enter new habit's name here"
         />
-        <label class="w-full">Unit Measurement</label>
+        <label class="w-full 2xl:text-[1.25rem]">Unit Measurement</label>
         <div class="grid grid-cols-2 gap-[0.5rem] mt-[1rem] mb-[3rem]">
           <p
             *ngFor="let unit of lookups.units"
             [ngClass]="{
-              'outline-gray-200 outline cursor-pointer outline-1 rounded-md p-2 w-full text-center hover:bg-secondary duration-300 hover:text-white hover:outline-secondary': true,
+              'outline-gray-200 outline cursor-pointer outline-1 rounded-md p-2  2xl:text-[1.25rem] w-full text-center hover:bg-secondary duration-300 hover:text-white hover:outline-secondary': true,
               'bg-secondary': currentUnitId === unit.unit_id
             }"
             (click)="setUnitId(unit.unit_id)"
@@ -95,7 +97,7 @@
       </form>
     </ng-container>
     <h1
-      class="text-[0.9rem] w-[40%] mx-auto mt-[2rem]"
+      class="text-[0.9rem] w-full mx-auto mt-[2rem] 2xl:text-[1.25rem] 2xl:mt-[3rem] 2xl:mb-[0.5rem]"
       *ngIf="lookups.total_activity != null"
     >
       <span class="font-bold" *ngIf="selectedUnit.unit_name"
@@ -105,7 +107,7 @@
     </h1>
     <div
       *ngIf="this.lookups.entries"
-      class="color-[#2adac7] rounded-md p-[0.75rem] mt-[0.25rem] w-[40%] mx-auto outline-gray-500 outline outline-1 overflow-x-scroll"
+      class="color-[#2adac7] rounded-md p-[0.75rem] mt-[0.25rem] mx-auto w-full outline-gray-500 outline outline-1 overflow-x-scroll"
     >
       <ngx-heatmap-calendar
         [dates]="lookups.formatted_entries"
@@ -119,12 +121,12 @@
         (onClickCell)="onClickCell($event)"
       />
     </div>
-    <div class="mx-auto w-[40%] flex flex-col gap-[1rem]">
+    <div class="mx-auto w-full flex flex-col gap-[1rem]">
       <div class="years-container inline-flex gap-2">
         <div
           *ngFor="let year of lookups.all_years"
           [ngClass]="{
-            'rounded-md py-1 px-2 mt-[0.25rem] text-[0.9rem] w-fit outline-gray-500 outline outline-1 duration-300 cursor-pointer': true,
+            'rounded-md py-1 px-2 mt-[0.25rem] text-[0.9rem] w-fit outline-gray-500 outline outline-1 duration-300 cursor-pointer 2xl:text-[1.25rem]': true,
             'bg-primary outline-primary text-white':
               startDate.getFullYear() === year
           }"
@@ -135,8 +137,11 @@
       </div>
 
       <div class="flex flex-row justify-between items-center mt-[2rem]">
-        <h1 class="font-bold">Activity Logs</h1>
-        <h1 *ngIf="lookups.paginated_entries.length > 0" class="font-normal">
+        <h1 class="font-bold 2xl:text-[1.25rem]">Activity Logs</h1>
+        <h1
+          *ngIf="lookups.paginated_entries.length > 0"
+          class="font-normal 2xl:text-[1.25rem]"
+        >
           Page <span class="font-bold">{{ lookups.current_page }}</span> of
           {{ lookups.total_pages }}
         </h1>
@@ -145,7 +150,7 @@
       <div class="entries-container flex flex-col gap-4">
         <div
           *ngFor="let entry of lookups.paginated_entries"
-          class="rounded-md py-2 px-5 mt-[0.25rem] text-[0.9rem] items-center flex flex-row justify-between w-full outline-gray-500 outline outline-1 cursor-pointer"
+          class="rounded-md py-2 px-5 mt-[0.25rem] 2xl:py-3 2xl:text-[1rem] text-[0.9rem] items-center flex flex-row justify-between w-full outline-gray-500 outline outline-1 cursor-pointer"
         >
           <p class="font-bold">{{ formatDate(entry.date) }}</p>
           <p class="font-normal">
@@ -159,7 +164,7 @@
         <div class="pagination-btns flex flex-row gap-4 items-center">
           <button
             [ngClass]="{
-              'w-fit p-2 outline outline-1 outline-gray-500 rounded-md cursor-pointer': true,
+              'w-fit p-2 outline outline-1 outline-gray-500 rounded-md cursor-pointer ': true,
               'opacity-50': lookups.current_page == 1
             }"
             (click)="changePage('back')"
