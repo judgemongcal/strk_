@@ -17,24 +17,23 @@ export const routes: Routes = [
         path: '',
         component: LoginComponent,
       },
+      { path: 'home', component: HomeComponent, canActivate: [authGuard] },
+      { path: 'habits', component: HabitsComponent, canActivate: [authGuard] },
+      {
+        path: 'add-habit/:id',
+        component: HabitAddComponent,
+        canActivate: [authGuard],
+      },
+      {
+        path: 'habit/:id',
+        component: HabitComponent,
+        canActivate: [authGuard],
+      },
+      {
+        path: 'add-entry/:habitId',
+        component: EntryAddComponent,
+        canActivate: [authGuard],
+      },
     ],
-  },
-
-  { path: 'home', component: HomeComponent, canActivate: [authGuard] },
-  { path: 'habits', component: HabitsComponent, canActivate: [authGuard] },
-  {
-    path: 'add-habit/:id',
-    component: HabitAddComponent,
-    canActivate: [authGuard],
-  },
-  {
-    path: 'habit/:id',
-    component: HabitComponent,
-    canActivate: [authGuard],
-  },
-  {
-    path: 'add-entry/:habitId',
-    component: EntryAddComponent,
-    canActivate: [authGuard],
   },
 ];
