@@ -50,4 +50,8 @@ export class LoginComponent implements OnInit {
       }
     );
   }
+
+  handleSignUpRedirect() {
+    this.router.navigate(['/sign-up']);
+  }
 }

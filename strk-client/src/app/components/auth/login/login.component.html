@@ -10,7 +10,7 @@
     </p>
 
     <div
-      class="form-container flex flex-col justify-center my-[1rem] text-dark-gray"
+      class="form-container flex flex-col justify-center mt-[1rem] mb-[0.5rem] text-dark-gray"
     >
       <form
         [formGroup]="form"
@@ -40,6 +40,18 @@
           Sign In
         </button>
       </form>
+      <div
+        class="sign-up flex flex-col gap-2 justify-center items-center mt-[1.5rem] text-center"
+      >
+        <p>
+          Are you new here?
+          <span
+            class="font-semibold hover:underline cursor-pointer hover:text-primary block lg:inline"
+            (click)="handleSignUpRedirect()"
+            >Create an account.</span
+          >
+        </p>
+      </div>
     </div>
   </div>
 </div>

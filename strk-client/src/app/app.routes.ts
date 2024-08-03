@@ -7,6 +7,7 @@ import { HabitAddComponent } from './components/habit-add/habit-add.component';
 import { HabitComponent } from './components/habit/habit.component';
 import { EntryAddComponent } from './components/entry-add/entry-add.component';
 import { AppLayoutComponent } from './components/common/layouts/app-layout/app-layout.component';
+import { SignUpComponent } from './components/auth/sign-up/sign-up.component';
 
 export const routes: Routes = [
   {
@@ -16,6 +17,10 @@ export const routes: Routes = [
       {
         path: '',
         component: LoginComponent,
+      },
+      {
+        path: 'sign-up',
+        component: SignUpComponent,
       },
       { path: 'home', component: HomeComponent, canActivate: [authGuard] },
       { path: 'habits', component: HabitsComponent, canActivate: [authGuard] },
