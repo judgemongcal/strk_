@@ -36,7 +36,36 @@ export class SignUpComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  signUp() {}
+  signUp() {
+    this.authService.signUp(this.form.value).subscribe(
+      (data: any) => {
+        if (data) {
+          this.signIn(data.payload.username, this.form.get('passowrd')?.value);
+        }
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    );
+  }
+
+  signIn(username: string, password: string) {
+    this.authService.signIn(this.form.value).subscribe(
+      (data: any) => {
+        if (data.token) {
+          const decoded: any = jwtDecode(data.token);
+          localStorage.setItem('token', data.token);
+          localStorage.setItem('user_id', decoded.userId);
+
+          // Redirect to home
+          this.router.navigate(['/home']);
+        }
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    );
+  }
 
   handleSignInRedirect() {
     this.router.navigate(['']);

@@ -10,13 +10,41 @@
     </p>
 
     <div
-      class="form-container flex flex-col justify-center mt-[1rem] mb-[0.5rem] text-dark-gray"
+      class="form-container flex flex-col justify-center mt-[2rem] mb-[0.5rem] text-dark-gray"
     >
       <form
         [formGroup]="form"
         (ngSubmit)="signUp()"
         class="flex flex-col gap-2"
       >
+        <label for="first_name" class="w-full 2xl:text-[1.25rem]"
+          >First Name</label
+        >
+        <input
+          type="text"
+          name="first_name"
+          formControlName="first_name"
+          class="outline outline-gray-200 2xl:text-[1.25rem] outline-1 rounded-md py-2 px-4 w-full mb-[1rem]"
+          placeholder="Enter your first name here"
+        />
+        <label for="last_name" class="w-full 2xl:text-[1.25rem]"
+          >Last Name</label
+        >
+        <input
+          type="text"
+          name="last_name"
+          formControlName="last_name"
+          class="outline outline-gray-200 2xl:text-[1.25rem] outline-1 rounded-md py-2 px-4 w-full mb-[1rem]"
+          placeholder="Enter your last name here"
+        />
+        <label for="last_name" class="w-full 2xl:text-[1.25rem]">Email</label>
+        <input
+          type="email"
+          name="email"
+          formControlName="email"
+          class="outline outline-gray-200 2xl:text-[1.25rem] outline-1 rounded-md py-2 px-4 w-full mb-[1rem]"
+          placeholder="Enter your email here"
+        />
         <label for="username" class="w-full 2xl:text-[1.25rem]">Username</label>
         <input
           type="text"
