@@ -15,6 +15,10 @@ export class NotificationService {
 
   show(message: string, isError: boolean): void {
     this.notificationObject.next({ message, isShown: true, isError });
+
+    setTimeout(() => {
+      this.dismiss();
+    }, 3000);
   }
 
   dismiss(): void {

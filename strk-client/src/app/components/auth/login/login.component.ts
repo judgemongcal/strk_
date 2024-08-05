@@ -12,6 +12,7 @@ import { AuthService } from '../../../services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
 import { UsersService } from '../../../services/users.service';
 import { jwtDecode } from 'jwt-decode';
+import { NotificationService } from '../../../services/notification.service';
 
 @Component({
   selector: 'app-login',
@@ -25,6 +26,7 @@ export class LoginComponent implements OnInit {
   router = inject(Router);
   authService = inject(AuthService);
   userService = inject(UsersService);
+  notificationService = inject(NotificationService);
 
   form: FormGroup = this.fb.group({
     username: new FormControl('', [Validators.required]),
@@ -46,7 +48,7 @@ export class LoginComponent implements OnInit {
         }
       },
       (error: any) => {
-        console.log(error);
+        this.notificationService.show(error.message, true);
       }
     );
   }

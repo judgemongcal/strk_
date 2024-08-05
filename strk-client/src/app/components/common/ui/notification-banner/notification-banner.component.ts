@@ -19,6 +19,7 @@ export class NotificationBannerComponent implements OnInit {
     this.notificationService.notification$.subscribe((notification: any) => {
       this.message = notification.message;
       this.isShown = notification.isShown;
+      this.isError = notification.isError;
     });
   }
 
