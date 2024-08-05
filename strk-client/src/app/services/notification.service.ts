@@ -8,15 +8,20 @@ import { Notification } from '../interfaces/notification';
 export class NotificationService {
   private notificationObject = new BehaviorSubject<Notification>({
     message: '',
-    isShown: false,
+    isShown: null,
+    isError: null,
   });
   notification$ = this.notificationObject.asObservable();
 
-  show(message: string): void {
-    this.notificationObject.next({ message, isShown: true });
+  show(message: string, isError: boolean): void {
+    this.notificationObject.next({ message, isShown: true, isError });
   }
 
   dismiss(): void {
-    this.notificationObject.next({ message: '', isShown: false });
+    this.notificationObject.next({
+      message: '',
+      isShown: false,
+      isError: null,
+    });
   }
 }

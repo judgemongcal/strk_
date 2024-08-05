@@ -1,1 +1,10 @@
-<p>notification-banner works!</p>
+<div
+  *ngIf="isShown === true"
+  class="p-3 rounded-md text-center text-[14px] lg:text-[16px] text-white"
+  [ngClass]="{
+    'bg-red-500': isError === true,
+    'bg-green-500': isError === false
+  }"
+>
+  <p>{{ message }}</p>
+</div>

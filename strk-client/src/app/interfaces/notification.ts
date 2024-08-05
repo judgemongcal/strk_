@@ -1,4 +1,5 @@
 export interface Notification {
   message: string;
-  isShown: boolean;
+  isShown: boolean | null;
+  isError: boolean | null;
 }
