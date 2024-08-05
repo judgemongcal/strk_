@@ -11,7 +11,7 @@ exports.register = async (req, res) => {
 			payload: user,
 		});
 	} catch (error) {
-		res.status(500).json({ error: error.message });
+		res.status(500).json({ message: error.message });
 	}
 };
 
@@ -27,7 +27,7 @@ exports.login = async (req, res) => {
 		if (!user || user.length === 0) {
 			return res
 				.status(400)
-				.json({ error: "Invalid username or password." });
+				.json({ message: "Invalid username or password." });
 		}
 
 		console.log("Retrieved user:", user);
@@ -39,7 +39,7 @@ exports.login = async (req, res) => {
 		if (!isMatch) {
 			return res
 				.status(400)
-				.json({ error: "Invalid username or password" });
+				.json({ message: "Invalid username or password" });
 		}
 
 		const token = jwt.sign(
@@ -50,6 +50,8 @@ exports.login = async (req, res) => {
 
 		res.status(200).json({ token });
 	} catch (error) {
-		res.status(500).json({ error: error.message });
+		res.status(500).json({
+			message: error.message,
+		});
 	}
 };

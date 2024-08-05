@@ -12,6 +12,7 @@ import { AuthService } from '../../../services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
 import { UsersService } from '../../../services/users.service';
 import { jwtDecode } from 'jwt-decode';
+import { NotificationService } from '../../../services/notification.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -25,6 +26,7 @@ export class SignUpComponent implements OnInit {
   router = inject(Router);
   authService = inject(AuthService);
   userService = inject(UsersService);
+  notificationService = inject(NotificationService);
 
   form: FormGroup = this.fb.group({
     first_name: new FormControl('', [Validators.required]),
@@ -52,6 +54,7 @@ export class SignUpComponent implements OnInit {
   signIn(username: string, password: string) {
     this.authService.signIn(this.form.value).subscribe(
       (data: any) => {
+        throw new Error();
         if (data.token) {
           const decoded: any = jwtDecode(data.token);
           localStorage.setItem('token', data.token);
@@ -62,7 +65,7 @@ export class SignUpComponent implements OnInit {
         }
       },
       (error: any) => {
-        console.log(error);
+        this.notificationService.show(error.error.message, true);
       }
     );
   }
