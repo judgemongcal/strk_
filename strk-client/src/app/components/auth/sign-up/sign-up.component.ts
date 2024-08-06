@@ -54,7 +54,6 @@ export class SignUpComponent implements OnInit {
   signIn(username: string, password: string) {
     this.authService.signIn(this.form.value).subscribe(
       (data: any) => {
-        throw new Error();
         if (data.token) {
           const decoded: any = jwtDecode(data.token);
           localStorage.setItem('token', data.token);

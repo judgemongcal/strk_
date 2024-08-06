@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { UsersService } from '../../services/users.service';
 import { HabitsService } from '../../services/habits.service';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-habits',
@@ -17,6 +18,7 @@ export class HabitsComponent implements OnInit {
   private authService = inject(AuthService);
   private userService = inject(UsersService);
   private habitsService = inject(HabitsService);
+  private notificationService = inject(NotificationService);
   private user_id: any = localStorage.getItem('user_id');
 
   lookups: any = {
@@ -35,7 +37,7 @@ export class HabitsComponent implements OnInit {
         this.lookups.user_info = data[0];
       },
       (error) => {
-        console.error(error);
+        this.notificationService.show(error.message, true);
       }
     );
   }
@@ -43,12 +45,10 @@ export class HabitsComponent implements OnInit {
   getUserHabits() {
     this.habitsService.getHabits(this.user_id).subscribe(
       (data: any) => {
-        console.log(data);
         this.lookups.habits = data;
-        console.log(this.lookups);
       },
       (error) => {
-        console.error(error);
+        this.notificationService.show(error.message, true);
       }
     );
   }
