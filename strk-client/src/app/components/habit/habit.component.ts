@@ -98,7 +98,6 @@ export class HabitComponent implements OnInit {
         this.getUnit();
       },
       (error: any) => {
-        console.log(error);
         this.notificationService.show(error.message, true);
       }
     );
@@ -133,7 +132,6 @@ export class HabitComponent implements OnInit {
         this.getTotalPages();
       },
       (error) => {
-        console.log(error);
         this.notificationService.show(error.message, true);
       }
     );
@@ -184,8 +182,6 @@ export class HabitComponent implements OnInit {
         });
       }
     });
-
-    console.log(this.lookups.formatted_entries);
   }
 
   // @Todo: Refactor ngx-heatmap-calendar
@@ -264,11 +260,6 @@ export class HabitComponent implements OnInit {
   }
 
   getTotalPages() {
-    console.log(this.lookups.entries.length, this.lookups.items_per_page);
-    console.log(
-      'Total pages: ' +
-        Math.ceil(this.lookups.entries.length / this.lookups.items_per_page)
-    );
     this.lookups.total_pages = Math.ceil(
       this.lookups.formatted_entries.length / this.lookups.items_per_page
     );
@@ -285,7 +276,6 @@ export class HabitComponent implements OnInit {
 
   changePage(action: string) {
     const page = this.lookups.current_page;
-    console.log(action, page);
 
     if (action === 'back') {
       page === 1
@@ -297,11 +287,6 @@ export class HabitComponent implements OnInit {
         ? (this.lookups.current_page = this.lookups.total_pages)
         : (this.lookups.current_page += 1);
     }
-
-    console.log(
-      'Current page: ' + this.lookups.current_page,
-      'Total Pages: ' + this.lookups.total_pages
-    );
 
     this.getPaginatedEntries();
   }
