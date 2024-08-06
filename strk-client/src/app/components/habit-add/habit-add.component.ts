@@ -10,6 +10,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { UnitsService } from '../../services/units.service';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-habit-add',
@@ -23,6 +24,7 @@ export class HabitAddComponent implements OnInit {
   private activatedRoute = inject(ActivatedRoute);
   private habitsService = inject(HabitsService);
   private unitsService = inject(UnitsService);
+  private notificatonService = inject(NotificationService);
   private user_id: any = null;
   currentUnitId: string = '';
   private fb = inject(FormBuilder);
@@ -37,10 +39,15 @@ export class HabitAddComponent implements OnInit {
   };
 
   ngOnInit(): void {
-    this.user_id = this.activatedRoute.params.subscribe((params) => {
-      this.user_id = params['id'];
-      this.setUserId();
-    });
+    this.user_id = this.activatedRoute.params.subscribe(
+      (params) => {
+        this.user_id = params['id'];
+        this.setUserId();
+      },
+      (error) => {
+        this.notificatonService.show(error.message, true);
+      }
+    );
 
     this.getUnits();
   }
@@ -73,7 +80,7 @@ export class HabitAddComponent implements OnInit {
         this.handleBack();
       },
       (error) => {
-        console.error(error);
+        this.notificatonService.show(error.message, true);
       }
     );
   }
