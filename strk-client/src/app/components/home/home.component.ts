@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { UsersService } from '../../services/users.service';
 import { HabitsService } from '../../services/habits.service';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-home',
@@ -17,6 +18,7 @@ export class HomeComponent implements OnInit {
   private authService = inject(AuthService);
   private userService = inject(UsersService);
   private habitsService = inject(HabitsService);
+  private notificationService = inject(NotificationService);
   private user_id: any = localStorage.getItem('user_id');
   private now = new Date();
 
@@ -37,7 +39,7 @@ export class HomeComponent implements OnInit {
         this.getMembershipLength();
       },
       (error) => {
-        console.error(error);
+        this.notificationService.show(error.message, true);
       }
     );
   }
@@ -58,7 +60,7 @@ export class HomeComponent implements OnInit {
         this.lookups.habits = data;
       },
       (error) => {
-        console.error(error);
+        this.notificationService.show(error.message, true);
       }
     );
   }
