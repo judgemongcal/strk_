@@ -133,7 +133,8 @@ export class HabitComponent implements OnInit {
         this.getTotalPages();
       },
       (error) => {
-        console.error(error);
+        console.log(error);
+        this.notificationService.show(error.message, true);
       }
     );
   }

@@ -78,10 +78,12 @@ export class EntryAddComponent implements OnInit {
   handleAdd() {
     this.habitEntriesService.addEntry(this.form.value).subscribe(
       (data: any) => {
+        this.notificationService.show(data.message, false);
         this.handleBack();
       },
       (error) => {
-        console.error(error);
+        console.log(error);
+        this.notificationService.show(error.message, true);
       }
     );
   }
