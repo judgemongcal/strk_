@@ -11,6 +11,7 @@ import {
 } from '@angular/forms';
 import { UnitsService } from '../../services/units.service';
 import { HabitEntriesService } from '../../services/habit-entries.service';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-entry-add',
@@ -27,6 +28,7 @@ export class EntryAddComponent implements OnInit {
   private habitsService = inject(HabitsService);
   private habitEntriesService = inject(HabitEntriesService);
   private unitsService = inject(UnitsService);
+  private notificationService = inject(NotificationService);
   private habit_id: any = null;
   private user_id: any = localStorage.getItem('user_id');
 
@@ -62,7 +64,7 @@ export class EntryAddComponent implements OnInit {
         this.lookups.habit = data;
       },
       (error) => {
-        console.error(error);
+        this.notificationService.show(error.message, true);
       }
     );
   }

@@ -16,6 +16,7 @@ import {
   HeatMapEvent,
   NgxHeatmapCalendar,
 } from '../../../lib/ngx-heatmap-calendar/src/public-api';
+import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-habit',
@@ -31,6 +32,7 @@ export class HabitComponent implements OnInit {
   private habitsService = inject(HabitsService);
   private habitEntriesService = inject(HabitEntriesService);
   private unitsService = inject(UnitsService);
+  private notificationService = inject(NotificationService);
   private habit_id: any = null;
   private user_id: any = localStorage.getItem('user_id');
   entryRawData: any[] = [];
@@ -83,7 +85,7 @@ export class HabitComponent implements OnInit {
         this.form.get('habit_name')?.setValue(data[0].habit_name);
       },
       (error) => {
-        console.error(error);
+        this.notificationService.show(error.error.message, true);
       }
     );
   }
@@ -96,7 +98,8 @@ export class HabitComponent implements OnInit {
         this.getUnit();
       },
       (error: any) => {
-        console.error(error);
+        console.log(error);
+        this.notificationService.show(error.message, true);
       }
     );
   }
@@ -331,7 +334,7 @@ export class HabitComponent implements OnInit {
         this.refreshHabitData();
       },
       (error) => {
-        console.error(error);
+        this.notificationService.show(error.error.message, true);
       }
     );
   }
@@ -353,7 +356,7 @@ export class HabitComponent implements OnInit {
         this.handleBack();
       },
       (error) => {
-        console.error(error);
+        this.notificationService.show(error.error.message, true);
       }
     );
   }
