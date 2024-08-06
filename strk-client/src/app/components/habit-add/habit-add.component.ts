@@ -76,7 +76,7 @@ export class HabitAddComponent implements OnInit {
   handleAdd() {
     this.habitsService.addHabit(this.form.value).subscribe(
       (data: any) => {
-        console.log(data);
+        this.notificatonService.show(data.message, false);
         this.handleBack();
       },
       (error) => {

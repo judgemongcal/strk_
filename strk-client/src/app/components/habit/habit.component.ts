@@ -333,6 +333,7 @@ export class HabitComponent implements OnInit {
         this.toggleEdit();
         this.setUnitId(this.currentUnitId);
         this.refreshHabitData();
+        this.notificationService.show(data.message, false);
       },
       (error) => {
         this.notificationService.show(error.error.message, true);
