@@ -20,4 +20,10 @@ export class HabitEntriesService {
   deleteEntry(entry_id: string) {
     return this.httpClient.delete(`${this.apiUrl}/${entry_id}`);
   }
+
+  deleteEntries(user_id: string, habit_id: string) {
+    return this.httpClient.delete(
+      `${this.apiUrl}/${user_id}/habit/${habit_id}`
+    );
+  }
 }

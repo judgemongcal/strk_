@@ -338,9 +338,20 @@ export class HabitComponent implements OnInit {
   }
 
   handleDeleteHabit() {
+    this.habitEntriesService
+      .deleteEntries(this.user_id, this.habit_id)
+      .subscribe(
+        (data: any) => {},
+        (error) => {
+          this.notificationService.show(error.error.message, true);
+          return;
+        }
+      );
+
     this.habitsService.deleteHabit(this.habit_id).subscribe(
       (data: any) => {
-        this.handleBack();
+        this.notificationService.show(data.message, false);
+        this.router.navigate(['/habits']);
       },
       (error) => {
         this.notificationService.show(error.error.message, true);
