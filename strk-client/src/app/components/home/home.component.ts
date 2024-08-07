@@ -87,8 +87,12 @@ export class HomeComponent implements OnInit {
     try {
       this.authService.signOut();
       this.router.navigate(['']);
+      this.notificationService.show('Signed out successfully.', false);
     } catch (error) {
-      throw new Error(`Error Signing Out: ${error}`);
+      this.notificationService.show(
+        'Error signing out. Please try again.',
+        true
+      );
     }
   }
 }
