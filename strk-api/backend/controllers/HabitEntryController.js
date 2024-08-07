@@ -61,3 +61,17 @@ exports.deleteEntry = async (req, res) => {
 		res.status(500).json({ error: error.message });
 	}
 };
+
+exports.deleteEntries = async (req, res) => {
+	try {
+		const entry = await habitEntryModel.deleteEntries(
+			req.params.userId,
+			req.params.habitId,
+		);
+		res.status(200).json({
+			message: "Entry has been deleted successfully",
+		});
+	} catch (error) {
+		res.status(500).json({ error: error.message });
+	}
+};

@@ -96,3 +96,26 @@ exports.deleteEntry = async (entryId) => {
 		);
 	}
 };
+
+exports.deleteEntries = async (userId, habitId) => {
+	try {
+		const res = await client.query(
+			`
+			DELETE FROM habit_entries
+			WHERE user_id = $1
+			AND   habit_id = $2
+			`,
+			[userId, habitId],
+		);
+
+		if (res.rowCOunt === 0) {
+			throw new Error("Entries not found");
+		}
+
+		return res.rows;
+	} catch (error) {
+		throw new Error(
+			`Error deleting habit: ${error.message}`,
+		);
+	}
+};
