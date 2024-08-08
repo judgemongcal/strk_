@@ -85,7 +85,7 @@ exports.deleteEntry = async (entryId) => {
 			[entryId],
 		);
 
-		if (res.rowCOunt === 0) {
+		if (res.rowCount === 0) {
 			throw new Error("Entry not found");
 		}
 
@@ -108,7 +108,7 @@ exports.deleteEntries = async (userId, habitId) => {
 			[userId, habitId],
 		);
 
-		if (res.rowCOunt === 0) {
+		if (res.rowCount === 0) {
 			throw new Error("Entries not found");
 		}
 
